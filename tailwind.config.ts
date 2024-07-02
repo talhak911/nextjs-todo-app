@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss";
-
+import {themes} from "./src/constants/colors"
 const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -8,10 +8,14 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors:{
+        ...themes
+      },
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        'dotted-pattern': 'radial-gradient(circle, rgba(0, 0, 0, 0.2) 1px, transparent 1px)',
+      },
+      backgroundSize: {
+        'dotted-size': '10px 10px',
       },
     },
   },

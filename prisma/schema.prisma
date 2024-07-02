@@ -1,0 +1,112 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id                        String    @id @default(auto()) @map("_id") @db.ObjectId
+  name                      String?
+  email                     String?   @unique
+  isVerified                Boolean  @default(false)
+  image                     String?
+ emailVerified DateTime?
+  accounts                  Account[]
+  sessions                  Session[]
+  createdAt                 DateTime  @default(now())
+  provider String @default("credentials")
+ updatedAt                 DateTime  @updatedAt
+  password                  String
+  lists List[]
+  forgotPasswordToken       String?
+  forgotPasswordTokenExpiry DateTime?
+  verifyToken               String?
+  verifyTokenExpiry         DateTime?
+  theme                     String    @default("vintage-garden")
+}
+
+
+model List {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  task  Task[]
+  userId String @db.ObjectId
+  user User @relation(fields: [userId],references: [id])
+}
+
+model Task {
+  id      String  @id @default(auto()) @map("_id") @db.ObjectId
+  title    String
+  isCompleted Boolean @default(false)
+  listId      String @db.ObjectId
+  list        List     @relation(fields: [listId], references: [id])
+}
+
+
+
+
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String   @unique
+  userId       String   @db.ObjectId
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VerificationToken {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+
+
+
+
+
+
+// model User {
+//   id                       String   @id @default(auto()) @map("_id") @db.ObjectId
+//   name                     String   @unique
+//   email                    String   @unique
+//   password                 String
+//   isVerified               Boolean  @default(false)
+//   forgotPasswordToken      String?
+//   forgotPasswordTokenExpiry DateTime?
+//   verifyToken              String?
+//   verifyTokenExpiry        DateTime?
+//   theme                    String @default("Vintage Garden")
+//   tasks                    Task[]   @relation("UserTasks")
+// }
