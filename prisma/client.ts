@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client'
+import { withAccelerate } from '@prisma/extension-accelerate'
 
 const globalForPrisma = global as unknown as { prisma: PrismaClient }
 
@@ -6,7 +7,7 @@ let prisma: PrismaClient
 
 const connectPrisma = async (retries = 5, delay = 1000) => {
   try {
-    prisma = globalForPrisma.prisma || new PrismaClient()
+    prisma = globalForPrisma.prisma || new PrismaClient().$extends(withAccelerate())
     await prisma.$connect()
     if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
     console.log('Prisma connected successfully.')

@@ -11,5 +11,5 @@
 // )
 
 // export const config = { matcher: ['/'] }
-// export {auth as middleware} from "auth"
-export default function() {}
+export {auth as middleware} from "auth"
+// export default function() {}
