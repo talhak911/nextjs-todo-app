@@ -19,7 +19,7 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "auth" : ["./src/auth"],
+      // "auth" : ["./src/auth"],
       "typesPath" : ["./src/types/types"],
       "prismaClientPath": ["./prisma/client"]
     }
