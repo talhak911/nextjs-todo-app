@@ -1,11 +1,10 @@
-import { SignUpForm, SignUpResponse, SignUpState } from "@/types/types";
+import { SignUpForm, apiResponse, SignUpState } from "@/types/types";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios, { AxiosResponse } from "axios";
 
 
-export const signInUser = createAsyncThunk<SignUpResponse, SignUpForm, {
-    rejectValue: string}
-    >(
+export const signInUser = createAsyncThunk
+    (
     'auth/registerUser',
     async (registerData: SignUpForm, { rejectWithValue }) => {
       const { name, email, password, confirmPassword } = registerData;
@@ -18,8 +17,8 @@ export const signInUser = createAsyncThunk<SignUpResponse, SignUpForm, {
       return rejectWithValue("Passwords do not match.");
     }
       try {
-        const response : AxiosResponse<SignUpResponse>= await axios.post('/api/users/signup', registerData);
-        return response.data as SignUpResponse;
+        const response : AxiosResponse= await axios.post('/api/users/signup', registerData);
+        return response.data ;
       } catch (error:any) {
         return rejectWithValue(`${error.response.data}`);
       }
@@ -55,7 +54,7 @@ export const signUpSlice = createSlice({
           })
           .addCase(
             signInUser.fulfilled,
-            (state, action: PayloadAction<SignUpResponse>) => {
+            (state, action: PayloadAction) => {
               state.loading = "succeeded"; 
               state.error = null; 
             }

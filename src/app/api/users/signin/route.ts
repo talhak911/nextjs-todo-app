@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/../prisma/client';
+import  prisma  from '@/../prisma/client';
 import bcryptjs from 'bcryptjs';
 import { SignJWT } from 'jose';
 import { sendEmail } from '@/utils/mailer';
@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
     console.log("User exists");
    
     // Check if password is correct
-    const validPassword = await bcryptjs.compare(password, user.password);
+    const validPassword = await bcryptjs.compare(password, user.hashedPassword as string);
     if (!validPassword) {
       return NextResponse.json({ error: "Invalid Email or Password!" }, { status: 400 });
     }

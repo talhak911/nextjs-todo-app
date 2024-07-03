@@ -1,6 +1,6 @@
 
 import {NextRequest,NextResponse} from 'next/server'
-import {prisma} from 'prismaClientPath'
+import prisma from 'prismaClientPath'
 import {  apiResponse } from 'typesPath'
 
 export async function POST(request:NextRequest) {

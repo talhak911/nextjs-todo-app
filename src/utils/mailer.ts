@@ -1,5 +1,5 @@
 import { Resend } from 'resend';
-import { prisma } from '@/../prisma/client';
+import prisma from '@/../prisma/client';
 import { v4 as uuidv4 } from 'uuid';
 
 export const sendEmail = async ({ email, emailType, userId }: any) => {

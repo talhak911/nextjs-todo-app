@@ -1,7 +1,7 @@
 //testing remaing !!!
 
 import {NextRequest,NextResponse} from 'next/server'
-import {prisma} from '@/../prisma/client'
+import prisma from '@/../prisma/client'
 import {  apiResponse } from '@/types/types'
 
 export async function POST(request:NextRequest) {

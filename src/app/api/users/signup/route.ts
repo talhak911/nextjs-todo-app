@@ -1,5 +1,5 @@
 import {NextRequest,NextResponse} from 'next/server'
-import {prisma} from '@/../prisma/client'
+import prisma from '@/../prisma/client'
 import bcryptjs from 'bcryptjs'
 import { sendEmail } from '@/utils/mailer'
 import { SignUpRequest, apiResponse } from '@/types/types'
@@ -21,13 +21,12 @@ export async function POST(request:NextRequest) {
         return NextResponse.json({error: "User already exists"}, {status: 400})
     }
          //hash password
-         const salt = await bcryptjs.genSalt(10)
-         const hashedPassword = await bcryptjs.hash(password, salt)
+         const hashedPassword = await bcryptjs.hash(password, 12)
          const newUser = await prisma.user.create({
             data: {
               name,
               email,
-              password: hashedPassword  //update model
+              hashedPassword  //update model
             }
           })
 

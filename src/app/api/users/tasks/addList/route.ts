@@ -1,5 +1,5 @@
 import {NextRequest,NextResponse} from 'next/server'
-import {prisma} from '@/../prisma/client'
+import prisma from '@/../prisma/client'
 import { AddTask, apiResponse } from '@/types/types'
 
 export async function POST(request:NextRequest) {

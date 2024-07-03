@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { StoreProvider } from "@/context/reduxProvider/ReduxProvider";
-import { AuthProvider } from "@/context/authProvider/AuthProvider";
+import { StoreProvider } from "@/context/ReduxProvider";
+import { AuthProvider } from "@/context/AuthProvider";
+import ToastProvider from "@/context/ToastProvider"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,9 +20,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      
       <body className={inter.className}>
         <StoreProvider>
           <AuthProvider>
+           <ToastProvider />
             <div className="bg-dotted-pattern bg-dotted-size h-screen">
             {children}
             </div>

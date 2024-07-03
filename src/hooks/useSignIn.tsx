@@ -1,6 +1,8 @@
+"use client"
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
+import toast from 'react-hot-toast';
 
 export const useSignIn = (callbackUrl: string) => {
   const router = useRouter();
@@ -29,10 +31,16 @@ export const useSignIn = (callbackUrl: string) => {
         password: formValues.password,
         callbackUrl,
       });
-
+   
+  
+        if(res?.error){
+          toast.error(res?.error);
+        }
+      
       setLoading(false);
 
       if (!res?.error) {
+        toast.success("Correct login");
         router.push(callbackUrl);
       } else {
         setError(res.error);
