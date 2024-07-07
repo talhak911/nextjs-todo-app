@@ -1,5 +1,5 @@
 
-export const themes= {
+export const COLORS= {
     'vintage-garden-primary': '#2D4659',
     'vintage-garden-background': '#FDFBDA',
     'vintage-garden-accent': '#819F7F',

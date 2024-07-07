@@ -1,15 +1,47 @@
 import { AuthOptions } from "next-auth";
-import NextAuth from "next-auth";
-import Google from "next-auth/providers/google";
 import GoogleProvider from "next-auth/providers/google";
 import  prisma  from "../../prisma/client";
 import bcryptjs from "bcryptjs";
 import { sendEmail } from "@/utils/mailer";
-import { PrismaAdapter } from "@auth/prisma-adapter";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import Credentials from "next-auth/providers/credentials";
 
-export const authOptions :AuthOptions={
-    callbacks:{},
+export const authOptions:AuthOptions ={
+
+//   adapter:PrismaAdapter(prisma),
+//   callbacks:{
+//     signIn(){
+
+//     }
+//   }
+events :{
+    async signIn({user,account}){
+         try {
+             if (!user.email) {
+                 throw new Error("Email is required");
+             }
+             if (account?.provider === "google"){
+             const existingUser = await prisma.user.findFirst({ where: { email: user.email } });
+             if (!existingUser) {
+                await prisma.user.create({
+                 data:{
+                     email:user.email,
+                     name:user.name,
+                     hashedPassword:await bcryptjs.hash("sfdljf",11),
+                     isVerified:true,
+                     provider:"google"
+                 }
+                })
+             }
+         }
+             
+     
+             
+           } catch (error) {
+         
+           }
+     
+}},
     
     secret: process.env.NEXTAUTH_SECRET,
     session: {
@@ -23,7 +55,8 @@ export const authOptions :AuthOptions={
         GoogleProvider({
             clientId:process.env.GOOGLE_CLIENT_ID!,
             clientSecret:process.env.GOOGLE_CLIENT_SECRET!
-        }),
+        },
+    ),
         Credentials({
             name: "Credentials",
             credentials: {

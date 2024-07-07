@@ -8,10 +8,8 @@ import React from "react";
 
   const session = useSession()
   return (
-    <div className="p-2 bg-gradient-to-b from-slate-800 to-slate-600 flex gap-2 ">
-      <Link href={"/clientPage"}>Client Page</Link>
-      <Link href={"/serverPage"}>Server Page</Link>
-      <Link href={"/middlewareProtected"}>Middleware Protected Page</Link>
+    <div className="p-2 bg-gradient-to-b from-slate-800 to-slate-600 flex gap-2 text-white ">
+      
       <div className="ml-auto">
         {session && session.data?.user?.name ? (
           <div className="flex gap-2">

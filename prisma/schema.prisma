@@ -16,31 +16,30 @@ model User {
   isVerified                Boolean  @default(false)
   forgotPasswordToken       String?
   forgotPasswordTokenExpiry DateTime?
-    verifyToken               String?
+  verifyToken               String?
   verifyTokenExpiry         DateTime?
 
   image         String?
   hashedPassword String?
   accounts      Account[]
   sessions      Session[]
-  // Optional for WebAuthn support
+
   Authenticator Authenticator[]
  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-// check provider !TODO
 provider String @default("credentials")
-theme                     String    @default("vintage-garden")
   lists List[]
 }
 
 model List {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
   title String
+  theme                     String    @default("vintage-garden")
   task  Task[]
-  userId String @db.ObjectId
-  user User @relation(fields: [userId],references: [id])
+  userEmail String 
+  user User @relation(fields: [userEmail],references: [email])
 }
 
 model Task {

@@ -1,29 +1,45 @@
-export type ErrorType ={
-    message:string,
-    success:boolean
-}
+// export type ErrorType ={
+//     message:string,
+//     success:boolean
+// }
 
+export type ResetPasswordParams={
+    password:string,
+    token:string
+}
+export type SignInParams={
+    email:string,
+    password:string,
+    callbackUrl:string
+}
 export type CustomInputProps ={
-    label: string;
+    label?: string;
     name: string;
     type: string;
     value: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   }
 
-export type SignUpForm={
+export type SignUpFormType={
     name:string 
     email:string 
     password:string 
     confirmPassword:string
 }
-export type SignUpState ={
-    signUpform:SignUpForm
+export type User =
+    {
+        name?: string | null;
+        email?: string | null;
+        image?: string | null;
+    } | undefined | null
+
+export type AuthState ={
+    user:User
     loading:"idle" | "pending" | "succeeded" | "failed"
-    error:string | null
+    signUpResponse : ApiResponse | null | undefined
 }
 
-export type apiResponse={
+export type ApiResponse={
     message:string
     success: boolean
 }

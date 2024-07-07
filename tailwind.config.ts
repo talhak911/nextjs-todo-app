@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss";
-import {themes} from "./src/constants/colors"
+import {COLORS} from "./src/constants/colors"
 const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       colors:{
-        ...themes
+        ...COLORS
       },
       backgroundImage: {
         'dotted-pattern': 'radial-gradient(circle, rgba(0, 0, 0, 0.2) 1px, transparent 1px)',

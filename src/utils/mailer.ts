@@ -27,14 +27,19 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
 
         const resend = new Resend(process.env.RESEND_API_KEY);
         console.log(resend + "my key " + process.env.RESEND_API_KEY);
-        
+       
         const mailOptions = {
             from: 'onboarding@resend.dev',
             to: [email],
             subject: emailType === "VERIFY" ? "Verify your email" : "Reset your password",
-            html: `<p>Click <a href="${process.env.DOMAIN}/verifyemail?token=${token}">here</a> to ${emailType === "VERIFY" ? "verify your email" : "reset your password"}
-                  or copy and paste the link below in your browser. <br> ${process.env.DOMAIN}/verifyemail?token=${token}
+            html: emailType === "VERIFY" ? 
+                `<p>Click <a href="${process.env.DOMAIN}/verifyemail?token=${token}">here</a> to verify your email
+                or copy and paste the link below in your browser. <br> ${process.env.DOMAIN}/verify-email?token=${token}
+                </p>` :
+                `<p>Click <a href="${process.env.DOMAIN}/resetPassword?token=${token}">here</a> to reset your password
+                  or copy and paste the link below in your browser. <br> ${process.env.DOMAIN}/reset-password?token=${token}
                   </p>`
+             
         };
 
         const { data, error } = await resend.emails.send(mailOptions);

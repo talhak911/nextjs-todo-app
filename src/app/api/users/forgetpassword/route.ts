@@ -10,33 +10,24 @@ export async function POST(request:NextRequest) {
     try{
       const reqBody : SignUpRequest= await request.json()
       
-      const {name,email,password}= reqBody
-      if(!email && !password){
-        throw new Error("email password required")
+      const {email}= reqBody
+      if(!email){
+        throw new Error("email required")
       }
-      console.log(reqBody)
+    
 
       const existingUser = await prisma.user.findUnique({where:{email}})
-      if(existingUser){
+      if(!existingUser){
         return NextResponse.json<ApiResponse>({
-          message: "User already exists",
+          message: "User does not exists",
           success: false,
           },{status:200})
     }
-         //hash password
-         const hashedPassword = await bcryptjs.hash(password, 12)
-         const newUser = await prisma.user.create({
-            data: {
-              name,
-              email,
-              hashedPassword,  //update model
-            }
-          })
 
 
-        await sendEmail({email,emailType:'VERIFY',userId:newUser.id})
+        await sendEmail({email,emailType:'RESET',userId:existingUser.id})
         return NextResponse.json<ApiResponse>({
-            message: "Account created successfully verify your email to sign In",
+            message: "Click the link on your email to reset your password",
             success: true,
             },{status:200})
         

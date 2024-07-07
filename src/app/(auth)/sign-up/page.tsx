@@ -1,27 +1,13 @@
 "use client";
 
-import CustomInput from "@/components/signUp/CustomInput";
-import { AppDispatch, RootState } from "@/redux/store";
+import CustomInput from "@/components/customInput/CustomInput";
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { updateField } from "@/redux/slices/signUpSlice";
-import { SignUpForm } from "@/types/types";
-import { registerUser } from "@/redux/slices/authSlice";
 import Link from "next/link";
+import { useSignUp } from "./useSignUp";
 
-export default function Home() {
-  const dispatch: AppDispatch = useDispatch();
-  const {signUpform,loading,error} = useSelector((state: RootState) => state.signUp);
+export default function SignUp() {
+  const { handleChange,signUpform,handleSignUp, loading, response} =useSignUp()
   
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    dispatch(updateField({ field: name as keyof SignUpForm, value }));
-  };
-  const handleSubmit = ()=>{
-    console.log("button submit clik")
-    dispatch(registerUser(signUpform))
-  }
-
   return (
     <div className="flex items-center justify-center min-h-screen bg-vintage-garden-background">
       <div className="w-full p-5  md:mt-0 sm:max-w-[330px] xl:p-0">
@@ -54,19 +40,19 @@ export default function Home() {
             value={signUpform.confirmPassword}
             onChange={handleChange}
           />
-            {error && <p className="text-sm  text-red-500"> {error}</p>}
+       
+            {response && <p className="text-sm  text-red-500"> {response}</p>}
           <button
-          onClick={handleSubmit}
+          onClick={handleSignUp}
             disabled={loading=='pending'}
             className="w-full bg-coastal-sunrise-accent rounded-full focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium text-sm px-5 py-2.5 text-center "
-            //disabled={loading}
           >
     
             {loading === 'pending'? 'Creating account...' : 'Create an account'} 
           </button>
           
           <p className="text-sm font-light ">
-            Already have an account?{" "}
+            Already have an account?
             <Link
               href="/sign-in"
               className="font-medium text-primary-600  hover:underline"
