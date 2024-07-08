@@ -1,11 +1,12 @@
 import AddTask from "@/components/addTask/AddTask";
-import ViewTasks from "@/components/viewTasks/ViewTasks";
+import Tasks from "@/components/tasks/Tasks";
 
-export default function Tasks(){
+export default function Task(){
     return (
-       <div>
+       <div className="md:px-40 px-8 py-20 min-h-screen bg-vintage-garden-background">
+        
          <AddTask/>
-        <ViewTasks/>
+        <Tasks/>
        
        </div>
     )

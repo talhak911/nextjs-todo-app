@@ -1,25 +1,35 @@
 "use client"
 import { THEMES } from "@/constants/themes";
 import CustomInput from "../customInput/CustomInput";
-import { useAddLists } from "./useAddList";
+import { useListCrud } from "./useListCrud";
+import { useEffect } from "react";
 
-export default function AddList() {
+export default function ListCrud({update,listIdToUpdate,listTitle}:{listTitle?:string,listIdToUpdate?:string,update?:boolean}) {
   const {
     visible,
     setVisible,
     title,
     handleChange,
     selectedTheme,
+    updateTitle,
     loading,
     handleAddList,
+    handleDeleteList,
+   handleUpdateList,
     handleThemeSelect,
-  } = useAddLists();
+  } = useListCrud();
+ 
+if(update && listTitle ){
+  updateTitle(listTitle)
+}
   return (
     <div>
-      <button onClick={() => setVisible(true)}>Add List</button>
+      <button
+      className="mt-3 text-3xl"
+      onClick={() => setVisible(true)}>{update ?"update":"+ Add List"}</button>
 
       {visible && (
-        <div className="inset-0 bg-vintage-garden-background absolute">
+        <div className="inset-0 bg-vintage-garden-background absolute z-20">
           <button
             onClick={() => {
               setVisible(false);
@@ -32,7 +42,7 @@ export default function AddList() {
             <CustomInput
               name="List name"
               type="text"
-              value={title}
+              value={title || listTitle}
               onChange={handleChange}
             />
             </div>
@@ -64,11 +74,26 @@ export default function AddList() {
         
            <button 
            disabled={loading}
-           onClick={()=>{handleAddList()}}
+           onClick={
+            update?
+            ()=>{ handleUpdateList(listIdToUpdate as string)}
+            :
+            ()=>{handleAddList()}
+           }
            className="mt-8 px-4 py-3 bg-coastal-sunrise-accent rounded-full">
-              {loading ?"adding.." :"Add List"}
+              {loading ?"loading ..." :update?"Update" :"Add List"}
             </button>
-      
+
+
+        {update && <button 
+        disabled={loading}
+        onClick={
+        ()=>{handleDeleteList(listIdToUpdate as string)}
+        }
+        className="mt-8 px-4 py-3 bg-coastal-sunrise-accent rounded-full">
+          {loading ?"loading ..." :"Delete"}
+        </button>}
+
           </div>
         </div>
       )}

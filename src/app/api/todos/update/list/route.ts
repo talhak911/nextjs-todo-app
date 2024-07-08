@@ -1,22 +1,26 @@
-//testing remaing !!!
-
 import {NextRequest,NextResponse} from 'next/server'
 import prisma from '@/../prisma/client'
 import {  ApiResponse } from '@/types/types'
 
-export async function POST(request:NextRequest) {
+export async function PUT(request:NextRequest) {
     try{
         const reqBody = await request.json()
-        const {listId}= reqBody
-        if(!listId){
-            throw new Error("task id required")
+        const {listId,title,theme}= reqBody
+        if( !title || ! listId || !theme){
+            throw new Error("title , listId and theme required")
           }
-       
-          await prisma.list.delete({where:{
-            id:listId}})
+          //const newList =
+          await prisma.list.update({
+            where:{
+                id:listId
+            },
+            data:{
+            title,
+            theme
+          }})
 
           return NextResponse.json<ApiResponse>({
-            message: "List deleted successfully",
+            message: "List Updated successfully",
             success: true,
             },{status:200})
     }

@@ -1,4 +1,5 @@
-import AddList from "@/components/addList/AddList"
+import ListCrud from "@/components/listCrud/ListCrud"
+import AppBar from "@/components/profile/Profile"
 import ViewLists from "@/components/viewLists/ViewLists"
 
 export default function Home(){
@@ -12,10 +13,11 @@ export default function Home(){
 //     )
 //  }
     return (
-        <div className="p-20 min-h-screen bg-vintage-garden-background">
-            <h1 className="w-full text-center  text-3xl md:text-4xl lg:text-6xl ">Todo Lists</h1>
+        <div className="md:px-40 px-8 py-20 min-h-screen bg-vintage-garden-background">
+            <AppBar/>
+            <h1 className="w-full text-center  text-3xl md:text-4xl lg:text-6xl mb-10">Todo Lists</h1>
             <ViewLists/>
-            <AddList/>
+            <ListCrud />
         </div>
     )
 }
