@@ -10,16 +10,13 @@ export default function AddTask() {
     handleChange,
     handleAddTask,
     loading,
-
+    listName
   } = useAddTask();
   return (
     <div>
-    
-
-  
-        <div className=" bg-vintage-garden-background ">
-         
-          <div className="flex flex-col gap-3 items-center justify-center  p-9">
+      <h1 className="text-center text-3xl">{listName}</h1>
+          <div className="flex  gap-3 items-center justify-center  p-9">
+          
             <div className="w-full max-w-sm">
             <CustomInput
               name="Task name"
@@ -34,12 +31,12 @@ export default function AddTask() {
            <button 
            disabled={loading}
            onClick={()=>{handleAddTask()}}
-           className="mt-8 px-4 py-3 bg-coastal-sunrise-accent rounded-full">
+           className=" px-4 py-3 bg-coastal-sunrise-accent rounded-full">
               {loading ?"adding.." :"Add List"}
             </button>
       
           </div>
-        </div>
+       
     
     </div>
   );
