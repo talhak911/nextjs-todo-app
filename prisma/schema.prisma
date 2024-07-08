@@ -39,7 +39,7 @@ model List {
   theme                     String    @default("vintage-garden")
   task  Task[]
   userEmail String 
-  user User @relation(fields: [userEmail],references: [email])
+  user User @relation(fields: [userEmail],references: [email], onDelete: Cascade)
 }
 
 model Task {
@@ -47,7 +47,7 @@ model Task {
   title    String
   isCompleted Boolean @default(false)
   listId      String @db.ObjectId
-  list        List     @relation(fields: [listId], references: [id])
+  list        List     @relation(fields: [listId], references: [id], onDelete: Cascade)
 }
 
 
