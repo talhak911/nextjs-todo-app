@@ -7,6 +7,7 @@ import { useEffect } from "react"
 export const useViewLists=()=>{
  const email = useAppSelector(state=>state.auth.user?.email)
  const lists =useAppSelector(state=>state.lists.lists)
+ const loading = useAppSelector(state=>state.lists.loading)
 const dispatch= useAppDispatch()
 console.log(email)
 useEffect(()=>{
@@ -15,7 +16,8 @@ if(typeof email === "string"){
 }
 },[dispatch,email])
 return {
-    lists
+    lists,
+    loading
 }
 }
 
