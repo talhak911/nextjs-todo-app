@@ -30,7 +30,7 @@ error:null
 
 
  export const fetchTasks = createAsyncThunk
- ("todoSlice/fetchTasks", async (listId: string, { rejectWithValue }) => {
+ ("taskSlice/fetchTasks", async (listId: string, { rejectWithValue }) => {
   try {
     const response = await axios.post("api/todos/get/tasks", {listId} );
     return response.data;
@@ -47,7 +47,7 @@ error:null
 
 
 export const addTask = createAsyncThunk
-("todoSlice/addTask", async ({listId,title,}: AddTaskType, { rejectWithValue }) => {
+("taskSlice/addTask", async ({listId,title,}: AddTaskType, { rejectWithValue }) => {
  try {
    const response = await axios.post("api/todos/add/task", { listId,title });
    return response.data;
@@ -59,6 +59,34 @@ export const addTask = createAsyncThunk
    return rejectWithValue(errorMessage);
  }
 });
+
+export const updateTask = createAsyncThunk
+("taskSlice/updateTask", async ({taskId,status}:{taskId:string,status:boolean},  { rejectWithValue }) => {
+ try {
+   const response = await axios.put("api/todos/update/task", { taskId,status });
+   return response.data;
+ } catch (error) {
+   let errorMessage = "An unknown error occurred";
+   if (axios.isAxiosError(error) && error.response) {
+     errorMessage = error.response.data.message || error.message;
+   }
+   return rejectWithValue(errorMessage);
+ }
+});
+export const deleteTask = createAsyncThunk
+("taskSlice/updateTask", async ({taskId}:{taskId:string},  { rejectWithValue }) => {
+ try {
+   const response = await axios.delete("api/todos/delete/task", {data:{ taskId }});
+   return response.data;
+ } catch (error) {
+   let errorMessage = "An unknown error occurred";
+   if (axios.isAxiosError(error) && error.response) {
+     errorMessage = error.response.data.message || error.message;
+   }
+   return rejectWithValue(errorMessage);
+ }
+});
+
 
 
 
