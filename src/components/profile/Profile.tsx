@@ -8,7 +8,7 @@ import React from "react";
 
   const session = useSession()
   return (
-    <div className="p-2 bg-gradient-to-b from-slate-800 to-slate-600 flex gap-2 text-white ">
+    <div className="p-2 bg-white  flex gap-2  ">
       
       <div className="ml-auto">
         {session && session.data?.user?.name ? (

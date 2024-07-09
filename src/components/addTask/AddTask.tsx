@@ -1,7 +1,9 @@
 "use client"
+import {clsx} from "clsx"
 import { THEMES } from "@/constants/themes";
 import CustomInput from "../customInput/CustomInput";
 import { useAddTask } from "./useAddTask";
+import { COLORS} from "@/constants/colors";
 
 export default function AddTask() {
   const {
@@ -10,28 +12,42 @@ export default function AddTask() {
     handleChange,
     handleAddTask,
     loading,
+    theme,
     listName
   } = useAddTask();
+  // const backgroundColor = COLORS[theme] as keyof ColorType || theme
+  // console.log(backgroundColor)
+  // if(!backgroundColor){
+  //   return null
+  // }
+console.log(theme)
+
   return (
-    <div>
-      <h1 className="text-center text-3xl">{listName}</h1>
-          <div className="flex  gap-3 items-center justify-center  p-9">
+   
+    <div className=""
+    // style={{backgroundColor:`${backgroundColor}`}}
+    >
+      <h1 className=" text-3xl font-bold text-center ">{listName}</h1>
+          <div className={`flex gap-3 items-center justify-center pt-8`}>
           
-            <div className="w-full max-w-sm">
+            <div className=" w-full">
             <CustomInput
               name="Task name"
+              theme={theme}
               type="text"
               value={title}
               onChange={handleChange}
             />
             </div>
-          
-     
+
         
            <button 
            disabled={loading}
            onClick={()=>{handleAddTask()}}
-           className=" px-4 py-3 bg-coastal-sunrise-accent rounded-full">
+          //  style={{
+          //   backgroundColor :COLORS[theme+"Accent"]
+          //  }}
+           className={`rounded-full px-3 py-2 w-[150px] bg-${theme}Accent font-medium`}>
               {loading ?"adding.." :"Add List"}
             </button>
       

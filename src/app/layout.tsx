@@ -25,7 +25,7 @@ export default function RootLayout({
         <StoreProvider>
           <AuthProvider>
            <ToastProvider />
-            <div className="bg-dotted-pattern bg-dotted-size h-screen">
+            <div className="bg-dotted-pattern bg-dotted-size bg-vintageGardenBackground h-screen">
             {children}
             </div>
             </AuthProvider>

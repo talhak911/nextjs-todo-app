@@ -11,7 +11,7 @@ export default function ListCrud({update,listIdToUpdate,listTitle}:{listTitle?:s
     title,
     handleChange,
     selectedTheme,
-    updateTitle,
+    updateListTitle,
     loading,
     handleAddList,
     handleDeleteList,
@@ -20,7 +20,7 @@ export default function ListCrud({update,listIdToUpdate,listTitle}:{listTitle?:s
   } = useListCrud();
  
 if(update && listTitle ){
-  updateTitle(listTitle)
+  updateListTitle(listTitle)
 }
   return (
     <div>
@@ -29,7 +29,7 @@ if(update && listTitle ){
       onClick={() => setVisible(true)}>{update ?"update":"+ Add List"}</button>
 
       {visible && (
-        <div className="inset-0 bg-vintage-garden-background absolute z-20">
+        <div className="inset-0 bg-vintageGardenBackground absolute z-20">
           <button
             onClick={() => {
               setVisible(false);
@@ -48,7 +48,7 @@ if(update && listTitle ){
             </div>
             {selectedTheme && (
               <h2>
-                Selected Theme is {" "}
+                Selected Theme is
                 <span className="font-bold">{selectedTheme} </span>
               </h2>
             )}
@@ -63,7 +63,7 @@ if(update && listTitle ){
                       color: theme.primary,
                       borderColor: theme.accent,
                     }}
-                    onClick={() => handleThemeSelect(theme.name)}
+                    onClick={() => handleThemeSelect(theme.value,theme.name)}
                   >
                     {theme.name}
                   </button>

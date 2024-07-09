@@ -11,6 +11,7 @@ export const useAddTask = () => {
   const [title, setTitle] = useState("");
   const listId = useSearchParams().get("listId");
   const listName = useSearchParams().get("listName");
+  const theme = useSearchParams().get("theme") || "vintage-garden"
   const dispatch = useAppDispatch();
   //  if(listId){
   //      useEffect(()=>{
@@ -53,6 +54,7 @@ export const useAddTask = () => {
     title,
     loading,
     listName,
+    theme,
     handleAddTask,
   };
 };
