@@ -3,49 +3,26 @@ import GoogleProvider from "next-auth/providers/google";
 import  prisma  from "../../prisma/client";
 import bcryptjs from "bcryptjs";
 import { sendEmail } from "@/utils/mailer";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
+// import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import Credentials from "next-auth/providers/credentials";
 
 export const authOptions:AuthOptions ={
-
-//   adapter:PrismaAdapter(prisma),
-//   callbacks:{
-//     signIn(){
-
-//     }
-//   }
-events :{
-    async signIn({user,account}){
-         try {
-             if (!user.email) {
-                 throw new Error("Email is required");
-             }
-             if (account?.provider === "google"){
-             const existingUser = await prisma.user.findFirst({ where: { email: user.email } });
-             if (!existingUser) {
-                await prisma.user.create({
-                 data:{
-                     email:user.email,
-                     name:user.name,
-                     hashedPassword:await bcryptjs.hash("sfdljf",11),
-                     isVerified:true,
-                     provider:"google"
-                 }
-                })
-             }
-         }
-             
-     
-             
-           } catch (error) {
-         
-           }
-     
-}},
-    
+    // adapter:PrismaAdapter(prisma),
     secret: process.env.NEXTAUTH_SECRET,
     session: {
       strategy: "jwt"
+    },
+    callbacks:{
+
+          async redirect({ baseUrl }) {
+            return baseUrl
+          },
+          async session({ session }) {
+            return session
+          },
+          async jwt({ token }) {
+            return token
+          }
     },
     debug: process.env.NODE_ENV !== "production",
     pages:{
@@ -53,8 +30,8 @@ events :{
     },
     providers:[
         GoogleProvider({
-            clientId:process.env.GOOGLE_CLIENT_ID!,
-            clientSecret:process.env.GOOGLE_CLIENT_SECRET!
+            clientId:process.env.GOOGLE_CLIENT_ID as string,
+            clientSecret:process.env.GOOGLE_CLIENT_SECRET as string
         },
     ),
         Credentials({
@@ -100,70 +77,36 @@ events :{
         
         }),
         
-       
+    ],
+events :{
+    async signIn({user,account}){
+         try {
+             if (!user.email) {
+                 throw new Error("Email is required");
+             }
+             if (account?.provider === "google"){
+             const existingUser = await prisma.user.findFirst({ where: { email: user.email } });
+             if (!existingUser) {
+                await prisma.user.create({
+                 data:{
+                     email:user.email,
+                     name:user.name,
+                     hashedPassword:await bcryptjs.hash("sfdljf",11),
+                     isVerified:true,
+                     provider:"google"
+                 }
+                })
+             }
+         }
+             
+     
+             
+           } catch (error) {
+         
+           }
+     
+}},
     
-    ]
+  
    
 }
-
-// const config: NextAuthConfig = {
-//     callbacks:{
-//         async redirect({ url, baseUrl }) {
-//             // Allows relative callback URLs
-//             if (url.startsWith("/")) return `${baseUrl}${url}`
-        
-//             // Allows callback URLs on the same origin
-//             if (new URL(url).origin === baseUrl) return url
-        
-//             return baseUrl
-//           },
-//         async signIn({user}){
-//             if(!user){
-//                 return false
-//             }
-// return true
-//         }
-//     },
- 
-//     providers: [
-//         Google,
-//         credentialsConfig
-//     ],
-//     pages:{
-//         signIn:"/sign-in",
-//         // error: '/auth/error'
-//     },
-//     secret:process.env.AUTH_SECRET,
-//     events:{
-    
-//     //    async signIn({user,account}){
-//     //         try {
-//     //             if (!user.email) {
-//     //                 throw new Error("Email is required");
-//     //             }
-//     //             if (account?.provider === "google"){
-//     //             const existingUser = await prisma.user.findFirst({ where: { email: user.email } });
-//     //             if (!existingUser) {
-//     //                await prisma.user.create({
-//     //                 data:{
-//     //                     email:user.email,
-//     //                     name:user.name,
-//     //                     password:await bcryptjs.hash("sfdljf",11),
-//     //                     isVerified:true,
-//     //                     provider:"google"
-//     //                 }
-//     //                })
-//     //             }
-//     //         }
-                
-        
-                
-//     //           } catch (error) {
-            
-//     //           }
-//     //    }
-//     }
-  
-// };
-
-// export const { handlers, auth, signIn, signOut } = NextAuth(config);

@@ -99,7 +99,7 @@ export const signInUserFun = createAsyncThunk(
   async (signInData: SignInParams, { rejectWithValue }) => {
     try {
       const response = await signIn("credentials", {
-        // redirect: false,
+         redirect: false,
         email: signInData.email,
         password: signInData.password,
         callbackUrl: signInData.callbackUrl,
@@ -107,13 +107,13 @@ export const signInUserFun = createAsyncThunk(
    
       if (response?.error) {
         return rejectWithValue(response?.error);
-      }
-      const session = await getSession();
+      }else
+     { const session = await getSession();
       if (session?.user) {
         return session.user;
       } else {
         return rejectWithValue("Failed to get user session");
-      }
+      }}
 
       // console.log(response)
     } catch (error: any) {
