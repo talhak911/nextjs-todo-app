@@ -14,20 +14,20 @@ if(loading){
 }
   return (
     <div className="flex flex-col gap-2">
-      {lists.map((list, index) => {
+      {lists?.map((list, index) => {
         return (
          <div 
          key={index} 
          className=" flex justify-between">
              <Link 
            
-            href={`/tasks?listId=${list.id}&listName=${list.title}`} 
+            href={`/tasks?listId=${list?.id}&listName=${list?.title}&theme=${list?.theme}`} 
             className="relative text-3xl w-fit"
           >
-            <span className="relative z-10">{list.title}</span>
+            <span className="relative z-10">{list?.title}</span>
             <span className="absolute left-0 right-0 bottom-2 h-[4px] bg-vintage-garden-accent z-0"></span>
           </Link>
-         <ListCrud update={true} listIdToUpdate = {list.id} listTitle={list.title}/>
+         <ListCrud update={true} listIdToUpdate = {list?.id} listTitle={list?.title}/>
          </div>
         );
       })}
