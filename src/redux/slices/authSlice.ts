@@ -8,7 +8,13 @@ import {
 } from "@/types/types";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { getSession, signIn, SignInResponse, useSession } from "next-auth/react";
+import {
+  getSession,
+  signIn,
+  SignInResponse,
+  useSession,
+} from "next-auth/react";
+import { useAppDispatch } from "@/hooks/useStore";
 
 const initialState: AuthState = {
   user: null,
@@ -16,12 +22,12 @@ const initialState: AuthState = {
   signUpResponse: null,
 };
 
-export const registerUserFun = createAsyncThunk<
+export const registerUser = createAsyncThunk<
   ApiResponse,
   SignUpRequest,
   { rejectValue: ApiResponse }
 >(
-  "auth/registerUserFun",
+  "auth/registerUser",
   async (registerData: SignUpRequest, { rejectWithValue }) => {
     try {
       const response: AxiosResponse<ApiResponse> = await axios.post(
@@ -35,42 +41,42 @@ export const registerUserFun = createAsyncThunk<
   }
 );
 
-export const forgetPasswordFun = createAsyncThunk<
+export const forgetPassword = createAsyncThunk<
   ApiResponse,
   string,
   { rejectValue: ApiResponse }
->(
-  "auth/forgetPasswordFun",
-  async (email: string, { rejectWithValue }) => {
-    try {
-      if (!email) {
-        return rejectWithValue({
-          message: "Email is missing",
-          success: false,
-        });
-      }
-      const response: AxiosResponse<ApiResponse> = await axios.post("/api/users/forgetpassword", { email });
-      return response.data;
-    } catch (error) {
-      let axiosError = error as AxiosError<ApiResponse>;
-      if (axiosError.response) {
-        return rejectWithValue(axiosError.response.data);
-      } else {
-        return rejectWithValue({
-          success: false,
-          message: 'An unknown error occurred',
-        });
-      }
+>("auth/forgetPassword", async (email: string, { rejectWithValue }) => {
+  try {
+    if (!email) {
+      return rejectWithValue({
+        message: "Email is missing",
+        success: false,
+      });
+    }
+    const response: AxiosResponse<ApiResponse> = await axios.post(
+      "/api/users/forgetpassword",
+      { email }
+    );
+    return response.data;
+  } catch (error) {
+    let axiosError = error as AxiosError<ApiResponse>;
+    if (axiosError.response) {
+      return rejectWithValue(axiosError.response.data);
+    } else {
+      return rejectWithValue({
+        success: false,
+        message: "An unknown error occurred",
+      });
     }
   }
-);
+});
 
-export const resetPasswordFun = createAsyncThunk<
+export const resetPassword = createAsyncThunk<
   ApiResponse,
   ResetPasswordParams,
   { rejectValue: ApiResponse }
 >(
-  "auth/restPasswordFun",
+  "auth/restPassword",
   async ({ password, token }: ResetPasswordParams, { rejectWithValue }) => {
     try {
       if (!password || !token) {
@@ -94,26 +100,92 @@ export const resetPasswordFun = createAsyncThunk<
   }
 );
 
-export const signInUserFun = createAsyncThunk(
-  "auth/signInUserFun",
+// export const updateProfile = createAsyncThunk
+// ("todoSlice/updateProfile", async ({image,name,email}: any, { rejectWithValue }) => {
+//  try {
+
+//    const response = await axios.put("api/todos/update/list", { listId,title,theme });
+//    return response.data;
+//  } catch (error) {
+//    let errorMessage = "An unknown error occurred";
+//    if (axios.isAxiosError(error) && error.response) {
+//      errorMessage = error.response.data.message || error.message;
+//    }
+//    return rejectWithValue(errorMessage);
+//  }
+// });
+export const updateName = createAsyncThunk(
+  "todoSlice/updateName",
+  async (
+    { name, email }: { name: string; email: string },
+    { rejectWithValue }
+  ) => {
+    try {
+      const response: AxiosResponse<ApiResponse> = await axios.put(
+        "api/users/update/name",
+        { name, email }
+      );
+      return response.data.message;
+      //  { const session = await getSession();
+      //   if (session?.user && session?.user?.email) {
+
+      //     const userData = await dispatch(fetchUserData(session?.user?.email)).unwrap();
+      //     return userData;
+      //   }
+
+      //  else {
+      //     return rejectWithValue("Failed to get user session");
+      //   }}
+    } catch (error) {
+      let errorMessage = "An unknown error occurred";
+      if (axios.isAxiosError(error) && error.response) {
+        errorMessage = error.response.data.message || error.message;
+      }
+      return rejectWithValue(errorMessage);
+    }
+  }
+);
+
+export const fetchUserData = createAsyncThunk<
+  User,
+  string,
+  { rejectValue: ApiResponse }
+>("auth/fetchUserData", async (email: string, { rejectWithValue }) => {
+  try {
+    const response: AxiosResponse<User> = await axios.post("/api/users/me", {
+      email,
+    });
+    return response.data;
+  } catch (error: any) {
+    return rejectWithValue(error.response.data);
+  }
+});
+
+export const signInUser = createAsyncThunk(
+  "auth/signInUser",
   async (signInData: SignInParams, { rejectWithValue }) => {
     try {
+      // const dispatch = useAppDispatch()
+      console.log("sign in crede");
       const response = await signIn("credentials", {
-         redirect: false,
+        redirect: false,
         email: signInData.email,
         password: signInData.password,
         callbackUrl: signInData.callbackUrl,
       });
-   
       if (response?.error) {
         return rejectWithValue(response?.error);
-      }else
-     { const session = await getSession();
-      if (session?.user) {
-        return session.user;
       } else {
-        return rejectWithValue("Failed to get user session");
-      }}
+        const session = await getSession();
+      
+        if (session?.user && session?.user?.email) {
+          return session.user
+          // const userData = await dispatch(fetchUserData(session?.user?.email)).unwrap();
+          // return userData;
+        } else {
+          return rejectWithValue("Failed to get user session");
+        }
+      }
 
       // console.log(response)
     } catch (error: any) {
@@ -132,30 +204,31 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(registerUserFun.pending, (state) => {
+      .addCase(registerUser.pending, (state) => {
         state.loading = "pending";
         state.signUpResponse = null;
       })
-      .addCase(registerUserFun.fulfilled, (state, action) => {
+      .addCase(registerUser.fulfilled, (state, action) => {
         state.loading = "succeeded";
         state.signUpResponse = action.payload;
       })
-      .addCase(registerUserFun.rejected, (state, action) => {
+      .addCase(registerUser.rejected, (state, action) => {
         state.loading = "failed";
         state.signUpResponse = action.payload;
       })
-      .addCase(signInUserFun.rejected, (state, action) => {
+      .addCase(signInUser.rejected, (state, action) => {
         state.user = null;
         state.loading = "failed";
       })
-      // .addCase(signInUserFun.pending,(state,action)=>{
+
+      // .addCase(signInUser.pending,(state,action)=>{
 
       // })
-      .addCase(signInUserFun.fulfilled, (state, action) => {
+      .addCase(signInUser.fulfilled, (state, action) => {
         state.user = action.payload;
         state.loading = "succeeded";
-      })
+      });
   },
 });
-export const {setUser} = authSlice.actions;
+export const { setUser } = authSlice.actions;
 export default authSlice.reducer;
