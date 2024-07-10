@@ -6,7 +6,7 @@ import React from 'react';
 
 const CustomInput: React.FC<CustomInputProps> = ({ label, name, type, value, onChange ,theme}) => (
   <div>
-    {label && <label htmlFor={name} className="block mb-2 text-sm font-medium  ">
+    {label && <label htmlFor={name} className="block mb-2 text-sm font-medium ml-2  ">
       {label}
     </label>}
     <input
@@ -14,7 +14,7 @@ const CustomInput: React.FC<CustomInputProps> = ({ label, name, type, value, onC
       type={type}
       name={name}
       id={name}
-      className={` border-${theme}Accent font-medium placeholder:opacity-100 placeholder:font-semibold bg-transparent border-4 text-${theme}Primary  rounded-full  w-full p-2.5`}
+      className={` border-${theme}Accent font-medium placeholder:opacity-100 placeholder:font-semibold bg-transparent border-4 text-${theme}Primary  rounded-full  w-full p-2`}
       placeholder={`Enter your ${label?.toLowerCase() || name}`}
       value={value}
       onChange={onChange}
