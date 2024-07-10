@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import { COLORS } from "./src/constants/colors";
+import { IBM_Plex_Mono } from "next/font/google";
 const safelist = Object.keys(COLORS).flatMap(color => [
   `bg-${color}`,
   `text-${color}`,
@@ -83,6 +84,9 @@ const config: Config = {
       backgroundSize: {
         "dotted-size": "20px 20px",
       },
+      fontFamily:{
+        sans: ['IBM Plex Mono', 'monospace'],
+      }
     },
   },
   plugins: [],

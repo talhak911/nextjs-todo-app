@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { StoreProvider } from "@/context/ReduxProvider";
 import { AuthProvider } from "@/context/AuthProvider";
-import ToastProvider from "@/context/ToastProvider"
+import ToastProvider from "@/context/ToastProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,15 +20,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      
       <body className={inter.className}>
         <StoreProvider>
           <AuthProvider>
-           <ToastProvider />
-            <div className="bg-dotted-pattern bg-dotted-size bg-vintageGardenBackground h-screen">
-            {children}
+            <ToastProvider />
+            <div className="bg-dotted-pattern font-mono bg-dotted-size bg-vintageGardenBackground h-screen">
+              {children}
             </div>
-            </AuthProvider>
+          </AuthProvider>
         </StoreProvider>
       </body>
     </html>
