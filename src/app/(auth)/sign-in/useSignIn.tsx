@@ -1,6 +1,6 @@
 "use client";
 import { useAppDispatch } from "@/hooks/useStore";
-import { forgetPasswordFun, signInUserFun } from "@/redux/slices/authSlice";
+import { forgetPassword, signInUser } from "@/redux/slices/authSlice";
 import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ChangeEvent, useState } from "react";
@@ -35,7 +35,7 @@ export const useSignIn = () => {
       if (!formValues.email.endsWith(".com")) {
         toast.error("Email should be valid");
       } else {
-        const res = await dispatch(forgetPasswordFun(formValues.email));
+        const res = await dispatch(forgetPassword(formValues.email));
         if (res?.meta.requestStatus == "rejected") {
           toast.error(res?.payload?.message as string);
         } else if (res?.meta.requestStatus == "fulfilled") {
@@ -58,8 +58,9 @@ export const useSignIn = () => {
       } else if (formValues.password.length < 3) {
         toast.error("Password too short");
       } else {
+        console.log(formValues.email," and  ", formValues.password)
         const res = await dispatch(
-          signInUserFun({
+          signInUser({
             callbackUrl: callbackUrl,
             email: formValues.email,
             password: formValues.password,
@@ -67,7 +68,7 @@ export const useSignIn = () => {
         );
 
         if (res?.meta.requestStatus == "rejected") {
-          toast.error(("rejected error " + res?.payload) as string);
+          toast.error(("rejected error " + res.payload) as string);
         } else if (res?.meta.requestStatus == "fulfilled") {
           toast.success("Correct login");
           router.push("/")

@@ -1,7 +1,7 @@
 import { SignUpFormType, SignUpRequest } from "@/types/types";
 import { useState } from "react";
 import { AppDispatch } from "@/redux/store";
-import { registerUserFun } from "@/redux/slices/authSlice";
+import { registerUser } from "@/redux/slices/authSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks/useStore";
 import toast from "react-hot-toast";
 
@@ -35,7 +35,7 @@ export const useSignUp = () => {
     
     else {
         const toSubmit :SignUpRequest= {name:signUpform.name, email:signUpform.email,password:signUpform.password}
-        await dispatch(registerUserFun(toSubmit))
+        await dispatch(registerUser(toSubmit))
     }
   };
 

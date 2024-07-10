@@ -1,7 +1,7 @@
 "use client";
 import CustomInput from "@/components/customInput/CustomInput";
 import Image from "next/image";
-import googleIcon from "@/../public/google.png";
+import googleIcon from "@/../public/assets/icons/google.png";
 import { useSignIn } from "@/app/(auth)/sign-in/useSignIn";
 
 const SignIn = () => {

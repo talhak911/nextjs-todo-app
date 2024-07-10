@@ -1,6 +1,6 @@
 "use client";
 import { useAppDispatch } from "@/hooks/useStore";
-import { resetPasswordFun } from "@/redux/slices/authSlice";
+import { resetPassword } from "@/redux/slices/authSlice";
 import { AppDispatch } from "@/redux/store";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
@@ -37,7 +37,7 @@ export const useResetPassword = () => {
         setLoading(true);
 
         const res = await dispatch(
-          resetPasswordFun({ password: formValues.password, token: token })
+          resetPassword({ password: formValues.password, token: token })
         );
 
         if (res?.meta.requestStatus == "rejected") {
