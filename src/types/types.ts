@@ -35,6 +35,7 @@ export type User =
     } | undefined | null
 
 export type AuthState ={
+    email:string |null
     user:User
     loading:"idle" | "pending" | "succeeded" | "failed"
     signUpResponse : ApiResponse | null | undefined
