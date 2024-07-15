@@ -8,9 +8,8 @@ import { ChangeEvent, useState } from "react";
 import toast from "react-hot-toast";
 
 export const useResetPassword = () => {
-  const router = useRouter()
+  const router = useRouter();
   const token = useSearchParams().get("token");
-  console.log(token);
   const dispatch: AppDispatch = useAppDispatch();
 
   const [loading, setLoading] = useState(false);
@@ -25,7 +24,6 @@ export const useResetPassword = () => {
   };
 
   const handleReset = async () => {
-    console.log("Reset Button click");
     if (!token) {
       toast.error("Token missing make sure you came from email link");
     } else if (formValues.password.length < 6) {
@@ -42,10 +40,9 @@ export const useResetPassword = () => {
 
         if (res?.meta.requestStatus == "rejected") {
           toast.error(res?.payload?.message as string);
-        }else {
-          toast.success(res?.payload?.message as string)
-          router.push("/sign-in")
-          
+        } else {
+          toast.success(res?.payload?.message as string);
+          router.push("/sign-in");
         }
       } catch (error: any) {
         setError(error.message || "An error occurred");

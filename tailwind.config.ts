@@ -1,44 +1,14 @@
 import type { Config } from "tailwindcss";
 import { COLORS } from "./src/constants/colors";
-import { IBM_Plex_Mono } from "next/font/google";
-const safelist = Object.keys(COLORS).flatMap(color => [
+
+const safelist = Object.keys(COLORS).flatMap((color) => [
   `bg-${color}`,
   `text-${color}`,
-  `border-${color}`
+  `border-${color}`,
+  `placeholder-${color}`,
 ]);
 
 const config: Config = {
-
-  // safelist:[
-  // 'vintageGardenprimary',
-  // "vintageGardenPrimary",
-  // "vintageGardenBackground",
-  // "vintageGardenAccent",
-  // "cosmicSymphonyPrimary",
-  // "cosmicSymphonyBackground",
-  // "cosmicSymphonyAccent",
-  // "rusticCharmPrimary",
-  // "rusticCharmBackground",
-  // "rusticCharmAccent",
-  // "sunsetSerenadePrimary",
-  // "sunsetSerenadeBackground",
-  // "sunsetSerenadeAccent",
-  // "industrialChicPrimary",
-  // "industrialChicBackground",
-  // "industrialChicAccent",
-  // "blackoutNeutralsPrimary",
-  // "blackoutNeutralsBackground",
-  // "blackoutNeutralsAccent",
-  // "vibrantSpectrumPrimary",
-  // "vibrantSpectrumBackground",
-  // "vibrantSpectrumAccent",
-  // "coastalSunrisePrimary",
-  // "coastalSunriseBackground",
-  // "coastalSunriseAccent",
-  // "oceanicSerenityPrimary",
-  // "oceanicSerenityBackground",
-  // "oceanicSerenityAccent",
-  //    ],
   safelist,
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -84,9 +54,9 @@ const config: Config = {
       backgroundSize: {
         "dotted-size": "20px 20px",
       },
-      fontFamily:{
-        sans: ['IBM Plex Mono', 'monospace'],
-      }
+      fontFamily: {
+        stint: ["Stint_Ultra_Condensed"],
+      },
     },
   },
   plugins: [],

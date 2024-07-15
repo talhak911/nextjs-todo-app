@@ -1,11 +1,12 @@
 "use client";
-import { useAppDispatch, useAppSelector } from "@/hooks/useStore";
+import { useAppDispatch } from "@/hooks/useStore";
 import {
   addList,
   deleteList,
   fetchLists,
   updateList,
 } from "@/redux/slices/listSlice";
+import { useSession } from "next-auth/react";
 import { ChangeEvent, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -15,7 +16,7 @@ export const useListCrud = () => {
   const [title, setTitle] = useState("");
   const [selectedTheme, setSelectedTheme] = useState<string>();
   const [theme, setTheme] = useState("");
-  const email = useAppSelector((state) => state.auth.user?.email);
+  const email = useSession().data?.user?.email;
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
@@ -23,7 +24,7 @@ export const useListCrud = () => {
   const updateListTitle = (title: string) => {
     useEffect(() => {
       setTitle(title);
-    }, []);
+    }, [title]);
   };
   const [visible, setVisible] = useState(false);
   const handleThemeSelect = (themeValue: string, themeName: string) => {
@@ -32,7 +33,6 @@ export const useListCrud = () => {
   };
 
   const handleAddList = async () => {
-    console.log("add list click");
     try {
       setLoading(true);
       if (title.length < 3) {
@@ -66,7 +66,6 @@ export const useListCrud = () => {
   };
 
   const handleUpdateList = async (listIdToUpdate: string) => {
-    console.log("update list click");
     try {
       setLoading(true);
       if (title.length < 3) {
@@ -91,7 +90,6 @@ export const useListCrud = () => {
         }
       }
     } catch (error: any) {
-      console.log(error);
       toast.error("Error", error.message);
     } finally {
       setLoading(false);
@@ -99,7 +97,6 @@ export const useListCrud = () => {
   };
 
   const handleDeleteList = async (listIdToDelete: string) => {
-    console.log("update list click");
     try {
       setLoading(true);
 
@@ -114,7 +111,6 @@ export const useListCrud = () => {
         }
       }
     } catch (error: any) {
-      console.log(error);
       toast.error("Error", error.message);
     } finally {
       setLoading(false);
@@ -122,16 +118,16 @@ export const useListCrud = () => {
   };
 
   return {
-    visible,
     setVisible,
     handleChange,
-    title,
-    loading,
     updateListTitle,
-    selectedTheme,
     handleAddList,
     handleUpdateList,
     handleDeleteList,
     handleThemeSelect,
+    selectedTheme,
+    visible,
+    title,
+    loading,
   };
 };

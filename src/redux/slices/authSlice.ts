@@ -4,19 +4,13 @@ import {
   AuthState,
   ResetPasswordParams,
   ApiResponse,
-  User,
 } from "@/types/types";
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios, { AxiosError, AxiosResponse } from "axios";
-import {
-  getSession,
-  signIn,
-  SignInResponse,
-  useSession,
-} from "next-auth/react";
-import { useAppDispatch } from "@/hooks/useStore";
+import { getSession, signIn } from "next-auth/react";
 
 const initialState: AuthState = {
+  email: null,
   user: null,
   loading: "idle",
   signUpResponse: null,
@@ -89,7 +83,6 @@ export const resetPassword = createAsyncThunk<
         "/api/users/resetpassword",
         { password, token }
       );
-      console.log("response from server is  ", response);
       return response.data;
     } catch (error: any) {
       return rejectWithValue({
@@ -100,42 +93,74 @@ export const resetPassword = createAsyncThunk<
   }
 );
 
-// export const updateProfile = createAsyncThunk
-// ("todoSlice/updateProfile", async ({image,name,email}: any, { rejectWithValue }) => {
-//  try {
+export const changePassword = createAsyncThunk<
+  ApiResponse,
+  { password: string; email: string },
+  { rejectValue: ApiResponse }
+>(
+  "auth/changePassword",
+  async (
+    { password, email }: { password: string; email: string },
+    { rejectWithValue }
+  ) => {
+    try {
+      const response: AxiosResponse<ApiResponse> = await axios.post(
+        "/api/users/update/password",
+        { password, email }
+      );
+      return response.data;
+    } catch (error: any) {
+      return rejectWithValue({
+        message: `error is ${error.message}`,
+        success: false,
+      });
+    }
+  }
+);
 
-//    const response = await axios.put("api/todos/update/list", { listId,title,theme });
-//    return response.data;
-//  } catch (error) {
-//    let errorMessage = "An unknown error occurred";
-//    if (axios.isAxiosError(error) && error.response) {
-//      errorMessage = error.response.data.message || error.message;
-//    }
-//    return rejectWithValue(errorMessage);
-//  }
-// });
 export const updateName = createAsyncThunk(
   "todoSlice/updateName",
   async (
     { name, email }: { name: string; email: string },
-    { rejectWithValue }
+    { rejectWithValue, dispatch }
   ) => {
     try {
       const response: AxiosResponse<ApiResponse> = await axios.put(
         "api/users/update/name",
         { name, email }
       );
-      return response.data.message;
-      //  { const session = await getSession();
-      //   if (session?.user && session?.user?.email) {
 
-      //     const userData = await dispatch(fetchUserData(session?.user?.email)).unwrap();
-      //     return userData;
-      //   }
+      if (response.data.success) {
+        dispatch(fetchUserData(email));
+      }
 
-      //  else {
-      //     return rejectWithValue("Failed to get user session");
-      //   }}
+      return response.data;
+    } catch (error) {
+      let errorMessage = "An unknown error occurred";
+      if (axios.isAxiosError(error) && error.response) {
+        errorMessage = error.response.data.message || error.message;
+      }
+      return rejectWithValue(errorMessage);
+    }
+  }
+);
+export const updateEmail = createAsyncThunk(
+  "todoSlice/updateEmail",
+  async (
+    { email, newEmail }: { newEmail: string; email: string },
+    { rejectWithValue, dispatch }
+  ) => {
+    try {
+      const response: AxiosResponse<ApiResponse> = await axios.put(
+        "api/users/update/email",
+        { email, newEmail }
+      );
+
+      if (response.data.success) {
+        dispatch(fetchUserData(email));
+      }
+
+      return response.data;
     } catch (error) {
       let errorMessage = "An unknown error occurred";
       if (axios.isAxiosError(error) && error.response) {
@@ -147,26 +172,36 @@ export const updateName = createAsyncThunk(
 );
 
 export const fetchUserData = createAsyncThunk<
-  User,
+  any,
   string,
   { rejectValue: ApiResponse }
 >("auth/fetchUserData", async (email: string, { rejectWithValue }) => {
   try {
-    const response: AxiosResponse<User> = await axios.post("/api/users/me", {
+    const response = await axios.post("/api/users/me", {
       email,
     });
+
+    if (response?.data?.image?.data) {
+      const base64String = Buffer.from(response?.data?.image?.data).toString(
+        "base64"
+      );
+      const img = `data:image/jpeg;base64,${base64String}`;
+
+      const res = { ...response.data, image: img };
+
+      return res;
+    }
     return response.data;
   } catch (error: any) {
+    console.log(error);
     return rejectWithValue(error.response.data);
   }
 });
 
 export const signInUser = createAsyncThunk(
   "auth/signInUser",
-  async (signInData: SignInParams, { rejectWithValue }) => {
+  async (signInData: SignInParams, { rejectWithValue, dispatch }) => {
     try {
-      // const dispatch = useAppDispatch()
-      console.log("sign in crede");
       const response = await signIn("credentials", {
         redirect: false,
         email: signInData.email,
@@ -177,17 +212,15 @@ export const signInUser = createAsyncThunk(
         return rejectWithValue(response?.error);
       } else {
         const session = await getSession();
-      
+
         if (session?.user && session?.user?.email) {
-          return session.user
-          // const userData = await dispatch(fetchUserData(session?.user?.email)).unwrap();
-          // return userData;
+          const userData = await dispatch(
+            fetchUserData(session?.user?.email)
+          ).unwrap();
         } else {
           return rejectWithValue("Failed to get user session");
         }
       }
-
-      // console.log(response)
     } catch (error: any) {
       return rejectWithValue(error?.error || "error occured");
     }
@@ -198,8 +231,8 @@ export const authSlice = createSlice({
   name: "authSlice",
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<User>) => {
-      state.user = action.payload;
+    setEmail: (state, action) => {
+      state.email = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -221,14 +254,12 @@ export const authSlice = createSlice({
         state.loading = "failed";
       })
 
-      // .addCase(signInUser.pending,(state,action)=>{
-
-      // })
-      .addCase(signInUser.fulfilled, (state, action) => {
+      .addCase(fetchUserData.fulfilled, (state, action) => {
+        state.email = action.payload.email;
         state.user = action.payload;
-        state.loading = "succeeded";
-      });
+      })
+
   },
 });
-export const { setUser } = authSlice.actions;
+export const { setEmail } = authSlice.actions;
 export default authSlice.reducer;

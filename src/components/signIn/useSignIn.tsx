@@ -1,7 +1,11 @@
 "use client";
 import { useAppDispatch } from "@/hooks/useStore";
-import { forgetPassword, signInUser } from "@/redux/slices/authSlice";
-import { signIn } from "next-auth/react";
+import {
+  fetchUserData,
+  forgetPassword,
+  signInUser,
+} from "@/redux/slices/authSlice";
+import { getSession, signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 import toast from "react-hot-toast";
@@ -29,7 +33,6 @@ export const useSignIn = () => {
   };
 
   const handleForgetPassword = async () => {
-    console.log("handle forget passw");
     try {
       setLoading(true);
       if (!formValues.email.endsWith(".com")) {
@@ -50,7 +53,6 @@ export const useSignIn = () => {
   };
 
   const handleSignIn = async () => {
-    console.log("sing in btuotn click");
     try {
       setLoading(true);
       if (!formValues.email.endsWith(".com")) {
@@ -58,7 +60,6 @@ export const useSignIn = () => {
       } else if (formValues.password.length < 3) {
         toast.error("Password too short");
       } else {
-        console.log(formValues.email," and  ", formValues.password)
         const res = await dispatch(
           signInUser({
             callbackUrl: callbackUrl,
@@ -66,21 +67,14 @@ export const useSignIn = () => {
             password: formValues.password,
           })
         );
-
         if (res?.meta.requestStatus == "rejected") {
           toast.error(("rejected error " + res.payload) as string);
         } else if (res?.meta.requestStatus == "fulfilled") {
           toast.success("Correct login");
-          router.push("/")
+          router.push("/");
         }
       }
 
-      // if (!res?.error) {
-      //   toast.success("Correct login");
-      //   router.push(callbackUrl);
-      // } else {
-      //   setError(res.error);
-      // }
     } catch (error: any) {
       toast.error("Error");
     } finally {
@@ -91,7 +85,14 @@ export const useSignIn = () => {
   const handleGoogleSignIn = async () => {
     try {
       setLoading(true);
-      await signIn("google", { callbackUrl });
+      const res = await signIn("google", { callbackUrl });
+      if (res?.ok) {
+        const session = await getSession();
+        const email = session?.user?.email;
+        if (email) {
+          await dispatch(fetchUserData(email));
+        }
+      }
     } catch (error: any) {
       toast.error("Error logging in");
     } finally {

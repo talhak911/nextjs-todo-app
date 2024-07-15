@@ -1,17 +1,15 @@
-'use client'
-import SyncSession from "@/components/syncSession/SyncSession";
+"use client";
 import { SessionProvider } from "next-auth/react";
 
-export const AuthProvider=({
-    children,
-  }: Readonly<{
-    children: React.ReactNode;
-  }>) =>{
-    return (
-        <SessionProvider > 
-          <SyncSession/>
-          {children} 
-          </SessionProvider>
-    );
-  }
-  
+export const AuthProvider = ({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) => {
+  return (
+    <SessionProvider>
+      {/* <SyncSession/> */}
+      {children}
+    </SessionProvider>
+  );
+};

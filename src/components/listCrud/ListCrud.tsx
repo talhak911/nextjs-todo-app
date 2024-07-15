@@ -1,54 +1,70 @@
-"use client"
+"use client";
 import { THEMES } from "@/constants/themes";
 import CustomInput from "../customInput/CustomInput";
 import { useListCrud } from "./useListCrud";
-import { useEffect } from "react";
 
-export default function ListCrud({update,listIdToUpdate,listTitle}:{listTitle?:string,listIdToUpdate?:string,update?:boolean}) {
+export default function ListCrud({
+  update,
+  listIdToUpdate,
+  listTitle,
+  theme,
+}: {
+  listTitle?: string;
+  listIdToUpdate?: string;
+  update?: boolean;
+  theme?: string;
+}) {
   const {
-    visible,
     setVisible,
-    title,
     handleChange,
-    selectedTheme,
     updateListTitle,
-    loading,
     handleAddList,
     handleDeleteList,
-   handleUpdateList,
+    handleUpdateList,
     handleThemeSelect,
+    visible,
+    loading,
+    title,
+    selectedTheme,
   } = useListCrud();
- 
-if(update && listTitle ){
-  updateListTitle(listTitle)
-}
+
+  if (update && listTitle) {
+    updateListTitle(listTitle);
+  }
   return (
     <div>
       <button
-      className="mt-3 text-3xl"
-      onClick={() => setVisible(true)}>{update ?"update":"+ Add List"}</button>
+        className={`mt-3 text-sm md:text-xl md:px-3 md:py-2 p-2 border-4 rounded-full border-${theme}Accent `}
+        onClick={() => setVisible(true)}
+      >
+        {update ? "update" : "+ Add List"}
+      </button>
 
       {visible && (
-        <div className="inset-0 bg-vintageGardenBackground absolute z-20">
+        <div
+          className={`inset-0 bg-${theme}Background absolute h-fit min-h-screen z-20 bg-dotted-pattern  bg-dotted-size`}
+        >
           <button
+            className="mt-10 md:ml-20 text-white ml-3 px-3 py-2 bg-rusticCharmPrimary rounded-xl"
             onClick={() => {
               setVisible(false);
             }}
           >
-            close
+            x
           </button>
-          <div className="flex flex-col gap-3 items-center justify-center h-screen p-9">
+          <div className="flex flex-col gap-3 items-center  min-h-screen  px-9 py-8 md:py-16 ">
             <div className="w-full max-w-sm">
-            <CustomInput
-              name="List name"
-              type="text"
-              value={title || listTitle}
-              onChange={handleChange}
-            />
+              <CustomInput
+                name="List name"
+                type="text"
+                theme={theme}
+                value={title}
+                onChange={handleChange}
+              />
             </div>
             {selectedTheme && (
               <h2>
-                Selected Theme is
+                Selected Theme is &nbsp;
                 <span className="font-bold">{selectedTheme} </span>
               </h2>
             )}
@@ -57,13 +73,13 @@ if(update && listTitle ){
                 return (
                   <button
                     key={index}
-                    className={`p-2   border-4 rounded-lg `}
+                    className={`p-2   border-4 rounded-full `}
                     style={{
                       backgroundColor: theme.background,
                       color: theme.primary,
                       borderColor: theme.accent,
                     }}
-                    onClick={() => handleThemeSelect(theme.value,theme.name)}
+                    onClick={() => handleThemeSelect(theme.value, theme.name)}
                   >
                     {theme.name}
                   </button>
@@ -71,29 +87,33 @@ if(update && listTitle ){
               })}
             </div>
 
-        
-           <button 
-           disabled={loading}
-           onClick={
-            update?
-            ()=>{ handleUpdateList(listIdToUpdate as string)}
-            :
-            ()=>{handleAddList()}
-           }
-           className="mt-8 px-4 py-3 bg-coastal-sunrise-accent rounded-full">
-              {loading ?"loading ..." :update?"Update" :"Add List"}
+            <button
+              disabled={loading}
+              onClick={
+                update
+                  ? () => {
+                      handleUpdateList(listIdToUpdate as string);
+                    }
+                  : () => {
+                      handleAddList();
+                    }
+              }
+              className={`mt-8 px-4 py-3 bg-${theme}Accent  font-semibold rounded-full`}
+            >
+              {loading ? "loading ..." : update ? "Update" : "Add List"}
             </button>
 
-
-        {update && <button 
-        disabled={loading}
-        onClick={
-        ()=>{handleDeleteList(listIdToUpdate as string)}
-        }
-        className="mt-8 px-4 py-3 bg-coastal-sunrise-accent rounded-full">
-          {loading ?"loading ..." :"Delete"}
-        </button>}
-
+            {update && (
+              <button
+                disabled={loading}
+                onClick={() => {
+                  handleDeleteList(listIdToUpdate as string);
+                }}
+                className="mt-3 px-4 py-3 bg-rusticCharmPrimary text-white rounded-full"
+              >
+                {loading ? "loading ..." : "Delete"}
+              </button>
+            )}
           </div>
         </div>
       )}

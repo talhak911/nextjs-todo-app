@@ -1,5 +1,5 @@
 "use client";
-import { useAppDispatch, useAppSelector } from "@/hooks/useStore";
+import { useAppDispatch } from "@/hooks/useStore";
 import { changePassword } from "@/redux/slices/authSlice";
 import { AppDispatch } from "@/redux/store";
 import { useSession } from "next-auth/react";
@@ -16,7 +16,6 @@ export const useChangePassword = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [formValues, setFormValues] = useState({
-    password: "",
     newPassword: "",
     confirmPassword: "",
   });
@@ -26,10 +25,7 @@ export const useChangePassword = () => {
   };
 
   const handleChangePassword = async () => {
-    console.log("change Button click");
-    if (!formValues.password) {
-      toast.error("enter you password");
-    } else if (formValues.newPassword.length < 6) {
+    if (formValues.newPassword.length < 6) {
       toast.error("Password should be 6 charaters long");
     } else if (formValues.newPassword !== formValues.confirmPassword) {
       toast.error("Password does not match");

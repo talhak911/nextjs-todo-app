@@ -1,23 +1,39 @@
-import ListCrud from "@/components/listCrud/ListCrud"
-import {Profile} from "@/components/profile/Profile"
-import ViewLists from "@/components/viewLists/ViewLists"
+import ListCrud from "@/components/listCrud/ListCrud";
+import ViewLists from "@/components/viewLists/ViewLists";
+import { Navbar } from "@/components/navbar/Navbar";
+import { Metadata } from "next";
 
-export default function Home(){
-    // const session =useSession()
+export const metadata: Metadata = {
+  title: "Todo Lists",
+  description: "Organize your tasks within separate lists.",
+  openGraph: {
+    title: "Todo Lists",
+    description: "Organize your tasks within separate lists.",
+    url: `${process.env.DOMAIN}`,
+  },
+};
 
-//  if(session.status==="unauthenticated"){
-//     return(
-//         <div className="flex items-center justify-center min-h-screen bg-vintage-garden-background">
-//             <h1>{session.status}</h1>
-//         </div>
-//     )
-//  }
-    return (
-        <div className="md:px-40 px-8 py-20 min-h-screen bg-vintage-garden-background">
-            <Profile/>
-            <h1 className="w-full text-center  text-3xl md:text-4xl lg:text-6xl mb-10">Todo Lists</h1>
-            <ViewLists/>
-            <ListCrud />
-        </div>
-    )
+export default function Home({
+  searchParams,
+}: {
+  searchParams?: { [key: string]: string | string[] | undefined };
+}) {
+  const theme = searchParams?.theme as string;
+  return (
+    <div
+      className={`md:px-40 px-14 md:py-10 py-3 min-h-screen bg-${theme}Background bg-dotted-pattern  bg-dotted-size`}
+    >
+      <Navbar />
+
+      <h1
+        className={`w-full text-center  text-3xl md:text-4xl lg:text-6xl mb-10 text-${theme}Primary font-bold font-stint`}
+      >
+        Todo Lists <span className={`text-${theme}Accent`}>.</span>
+      </h1>
+      <div className={`max-w-3xl w-full mx-auto text-${theme}Primary `}>
+        <ViewLists theme={theme} />
+        <ListCrud theme={theme} />
+      </div>
+    </div>
+  );
 }

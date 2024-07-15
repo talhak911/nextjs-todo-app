@@ -11,20 +11,13 @@ export const useAddTask = () => {
   const [title, setTitle] = useState("");
   const listId = useSearchParams().get("listId");
   const listName = useSearchParams().get("listName");
-  const theme = useSearchParams().get("theme") || "vintage-garden"
+  const theme = useSearchParams().get("theme") || "vintage-garden";
   const dispatch = useAppDispatch();
-  //  if(listId){
-  //      useEffect(()=>{
-
-  //      },[])
-  //  }
-
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
 
   const handleAddTask = async () => {
-    console.log("add list click");
     try {
       setLoading(true);
       if (title.length < 3) {
@@ -39,7 +32,7 @@ export const useAddTask = () => {
         } else if (res?.meta.requestStatus == "fulfilled") {
           setTitle("");
           toast.success("List add");
-          dispatch(fetchTasks(listId))
+          dispatch(fetchTasks(listId));
         }
       }
     } catch (error: any) {
@@ -50,11 +43,11 @@ export const useAddTask = () => {
   };
 
   return {
+    handleAddTask,
     handleChange,
     title,
     loading,
     listName,
     theme,
-    handleAddTask,
   };
 };
