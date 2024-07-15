@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
-import { StoreProvider } from "@/context/ReduxProvider";
-import { AuthProvider } from "@/context/AuthProvider";
-import ToastProvider from "@/context/ToastProvider";
+import { StoreProvider } from "@/providers/ReduxProvider";
+import { AuthProvider } from "@/providers/AuthProvider";
+import ToastProvider from "@/providers/ToastProvider";
 
 const inter = IBM_Plex_Mono({ subsets: ["latin"], weight: "500" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('http://localhost:3000'),
+  metadataBase: new URL('https://todo-app-talha.vercel.app/'),
   title: {
     default: "Todo App",
     template: "%s | NextJs Todo App",
