@@ -60,19 +60,20 @@ export const useSignIn = () => {
       } else if (formValues.password.length < 3) {
         toast.error("Password too short");
       } else {
-        const res = await dispatch(
+        // const res =
+         await dispatch(
           signInUser({
             callbackUrl: callbackUrl,
             email: formValues.email,
             password: formValues.password,
           })
         );
-        if (res?.meta.requestStatus == "rejected") {
-          toast.error(("rejected error " + res.payload) as string);
-        } else if (res?.meta.requestStatus == "fulfilled") {
-          toast.success("Correct login");
-          router.push("/");
-        }
+        // if (res?.meta.requestStatus == "rejected") {
+        //   toast.error(("rejected error " + res.payload) as string);
+        // } else if (res?.meta.requestStatus == "fulfilled") {
+        //   toast.success("Correct login");
+        //   router.push("/");
+        // }
       }
 
     } catch (error: any) {
@@ -88,18 +89,19 @@ export const useSignIn = () => {
       const res = await signIn("google"
          //{ callbackUrl }
         );
-      if (res?.ok) {
-        const session = await getSession();
-        const email = session?.user?.email;
-        if (email) {
-          await dispatch(fetchUserData(email));
-        }
-      }
+      // if (res?.ok) {
+      //   const session = await getSession();
+      //   const email = session?.user?.email;
+      //   if (email) {
+      //     await dispatch(fetchUserData(email));
+      //   }
+      // }
     } catch (error: any) {
       toast.error("Error logging in");
-    } finally {
-      setLoading(false);
     }
+    //  finally {
+    //   setLoading(false);
+    // }
   };
 
   return {
