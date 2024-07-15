@@ -3,6 +3,7 @@
 import CustomInput from "@/components/customInput/CustomInput";
 
 import { useResetPassword } from "./useResetPassword";
+import { Suspense } from "react";
 const ResetPassword = () => {
   const { formValues, handleChange, handleReset, loading } = useResetPassword();
   return (
@@ -48,4 +49,13 @@ const ResetPassword = () => {
   );
 };
 
-export default ResetPassword;
+
+
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ResetPassword />
+    </Suspense>
+  );
+}

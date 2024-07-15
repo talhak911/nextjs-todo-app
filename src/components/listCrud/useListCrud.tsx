@@ -10,22 +10,29 @@ import { useSession } from "next-auth/react";
 import { ChangeEvent, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-export const useListCrud = () => {
+export const useListCrud = ({update,listTitle}:{update?:boolean,listTitle?:string}) => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState("");
   const [selectedTheme, setSelectedTheme] = useState<string>();
   const [theme, setTheme] = useState("");
   const email = useSession().data?.user?.email;
+
+  useEffect(() => {
+    if (update && listTitle) {
+      setTitle(listTitle);
+    }
+  }, [update, listTitle]);
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
 
-  const updateListTitle = (title: string) => {
-    useEffect(() => {
-      setTitle(title);
-    }, [title]);
-  };
+  // const updateListTitle = (title: string) => {
+  //   useEffect(() => {
+  //     setTitle(title);
+  //   }, [title]);
+  // };
   const [visible, setVisible] = useState(false);
   const handleThemeSelect = (themeValue: string, themeName: string) => {
     setTheme(themeValue);
@@ -120,7 +127,7 @@ export const useListCrud = () => {
   return {
     setVisible,
     handleChange,
-    updateListTitle,
+    // updateListTitle,
     handleAddList,
     handleUpdateList,
     handleDeleteList,

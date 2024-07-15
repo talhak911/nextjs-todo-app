@@ -1,8 +1,9 @@
 "use client";
 import Link from "next/link";
 import { useVerifyEmail } from "./useVerifyEmail";
+import { Suspense } from "react";
 
-export default function VerifyEmail() {
+function VerifyEmail() {
   const { verified, error, verifyUserEmail } = useVerifyEmail();
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
@@ -29,4 +30,11 @@ export default function VerifyEmail() {
       )}
     </div>
   );
+}
+export default function Page(){
+  return(
+    <Suspense>
+      <VerifyEmail/>
+    </Suspense>
+  )
 }

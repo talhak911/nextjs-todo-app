@@ -1,3 +1,4 @@
+"use client"
 import axios from "axios";
 import { signOut } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
