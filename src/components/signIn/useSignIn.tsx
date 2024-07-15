@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 
 export const useSignIn = () => {
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "https://todo-app-talha.vercel.app";
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -60,20 +60,19 @@ export const useSignIn = () => {
       } else if (formValues.password.length < 3) {
         toast.error("Password too short");
       } else {
-        // const res =
-         await dispatch(
+        const res = await dispatch(
           signInUser({
             callbackUrl: callbackUrl,
             email: formValues.email,
             password: formValues.password,
           })
         );
-        // if (res?.meta.requestStatus == "rejected") {
-        //   toast.error(("rejected error " + res.payload) as string);
-        // } else if (res?.meta.requestStatus == "fulfilled") {
-        //   toast.success("Correct login");
-        //   router.push("/");
-        // }
+        if (res?.meta.requestStatus == "rejected") {
+          toast.error(("rejected error " + res.payload) as string);
+        } else if (res?.meta.requestStatus == "fulfilled") {
+          toast.success("Correct login");
+          router.push("/");
+        }
       }
 
     } catch (error: any) {
@@ -86,22 +85,19 @@ export const useSignIn = () => {
   const handleGoogleSignIn = async () => {
     try {
       setLoading(true);
-      const res = await signIn("google"
-         //{ callbackUrl }
-        );
-      // if (res?.ok) {
-      //   const session = await getSession();
-      //   const email = session?.user?.email;
-      //   if (email) {
-      //     await dispatch(fetchUserData(email));
-      //   }
-      // }
+      const res = await signIn("google", { callbackUrl });
+      if (res?.ok) {
+        const session = await getSession();
+        const email = session?.user?.email;
+        if (email) {
+          await dispatch(fetchUserData(email));
+        }
+      }
     } catch (error: any) {
       toast.error("Error logging in");
+    } finally {
+      setLoading(false);
     }
-    //  finally {
-    //   setLoading(false);
-    // }
   };
 
   return {
