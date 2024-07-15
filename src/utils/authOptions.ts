@@ -21,7 +21,7 @@ export const authOptions: AuthOptions = {
       return token;
     },
   },
-  debug: process.env.NODE_ENV !== "production",
+  debug: true,
   pages: {
     signIn: "/sign-in",
   },
