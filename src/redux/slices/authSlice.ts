@@ -206,7 +206,7 @@ export const signInUser = createAsyncThunk(
         redirect: false,
         email: signInData.email,
         password: signInData.password,
-        callbackUrl: signInData.callbackUrl,
+        // callbackUrl: signInData.callbackUrl,
       });
       if (response?.error) {
         return rejectWithValue(response?.error);

@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 
 export const useSignIn = () => {
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/";
+  const callbackUrl = searchParams.get("callbackUrl") || "https://todo-app-talha.vercel.app";
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -85,7 +85,9 @@ export const useSignIn = () => {
   const handleGoogleSignIn = async () => {
     try {
       setLoading(true);
-      const res = await signIn("google", { callbackUrl });
+      const res = await signIn("google"
+         //{ callbackUrl }
+        );
       if (res?.ok) {
         const session = await getSession();
         const email = session?.user?.email;
