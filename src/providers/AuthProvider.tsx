@@ -8,7 +8,6 @@ export const AuthProvider = ({
 }>) => {
   return (
     <SessionProvider>
-      {/* <SyncSession/> */}
       {children}
     </SessionProvider>
   );
