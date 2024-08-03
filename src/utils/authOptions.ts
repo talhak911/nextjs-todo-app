@@ -1,6 +1,7 @@
 import { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import prisma from "../../prisma/client";
+import { v4 as uuidv4 } from 'uuid';
 import bcryptjs from "bcryptjs";
 import { mailer} from "@/utils/mailer";
 import Credentials from "next-auth/providers/credentials";
@@ -99,14 +100,24 @@ export const authOptions: AuthOptions = {
               data: {
                 email: user.email,
                 name: user.name,
-                hashedPassword: await bcryptjs.hash("sfdljf", 11),
+                hashedPassword: await bcryptjs.hash(uuidv4(), 11),
                 isVerified: true,
                 provider: "google",
               },
             });
+          } else if (!existingUser.isVerified) {
+            await prisma.user.update({
+              where: { email: user.email },
+              data: {
+                isVerified: true,
+                name: user.name,
+              },
+            });
           }
         }
-      } catch (error) {}
+      } catch (error) {
+        console.log("error while sign in ",error)
+      }
     },
   },
 };
