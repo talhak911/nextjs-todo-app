@@ -12,8 +12,8 @@ export async function POST(request: NextRequest) {
     if (!email && !password) {
       throw new Error("email password required");
     }
-
-    const existingUser = await prisma.user.findUnique({ where: { email } });
+    const userEmail= email.toLowerCase()
+    const existingUser = await prisma.user.findUnique({ where: { email:userEmail } });
     if (existingUser) {
       return NextResponse.json<ApiResponse>(
         {
@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
     const newUser = await prisma.user.create({
       data: {
         name,
-        email,
+        email:userEmail,
         hashedPassword, //update model
       },
     });
