@@ -1,9 +1,9 @@
 import { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import prisma from "../../prisma/client";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import bcryptjs from "bcryptjs";
-import { mailer} from "@/utils/mailer";
+import { mailer } from "@/utils/mailer";
 import Credentials from "next-auth/providers/credentials";
 
 export const authOptions: AuthOptions = {
@@ -116,7 +116,7 @@ export const authOptions: AuthOptions = {
           }
         }
       } catch (error) {
-        console.log("error while sign in ",error)
+        console.log("error while sign in ", error);
       }
     },
   },

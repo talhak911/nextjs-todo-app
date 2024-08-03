@@ -6,9 +6,5 @@ export const AuthProvider = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-  return (
-    <SessionProvider>
-      {children}
-    </SessionProvider>
-  );
+  return <SessionProvider>{children}</SessionProvider>;
 };

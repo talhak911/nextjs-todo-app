@@ -20,12 +20,12 @@ export default function SignUp() {
     <div className="flex items-center justify-center min-h-screen bg-vintage-garden-background">
       <div className="w-full p-5  md:mt-0 sm:max-w-[330px] xl:p-0">
         <div className="space-y-4 md:space-y-4">
-       <div className="flex items-center justify-center gap-0 text-3xl md:text-4xl font-bold">
-       <h1 className="  text-vintageGardenPrimary   text-center font-stint inline-flex">
-        Sign Up 
-      </h1>
-      <span className=" text-vintageGardenAccent -ml-1">.</span>
-       </div>
+          <div className="flex items-center justify-center gap-0 text-3xl md:text-4xl font-bold">
+            <h1 className="  text-vintageGardenPrimary   text-center font-stint inline-flex">
+              Sign Up
+            </h1>
+            <span className=" text-vintageGardenAccent -ml-1">.</span>
+          </div>
           <CustomInput
             label="Name"
             name="name"
@@ -60,7 +60,10 @@ export default function SignUp() {
           />
 
           {response && (
-            <p className="text-sm text-rusticCharmPrimary text-center"> {response}</p>
+            <p className="text-sm text-rusticCharmPrimary text-center">
+              {" "}
+              {response}
+            </p>
           )}
 
           <button

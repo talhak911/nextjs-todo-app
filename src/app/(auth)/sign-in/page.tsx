@@ -13,9 +13,9 @@ export const metadata: Metadata = {
 };
 
 export default function SignInPage() {
-  return(
+  return (
     <Suspense>
-    <SignIn />
+      <SignIn />
     </Suspense>
-    )
+  );
 }

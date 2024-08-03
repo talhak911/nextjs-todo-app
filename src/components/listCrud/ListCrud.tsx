@@ -17,7 +17,6 @@ export default function ListCrud({
   const {
     setVisible,
     handleChange,
-    // updateListTitle,
     handleAddList,
     handleDeleteList,
     handleUpdateList,
@@ -28,9 +27,6 @@ export default function ListCrud({
     selectedTheme,
   } = useListCrud({update,listTitle});
 
-  // if (update && listTitle) {
-  //   updateListTitle(listTitle);
-  // }
   return (
     <div>
       <button

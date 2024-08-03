@@ -8,7 +8,7 @@ import ToastProvider from "@/providers/ToastProvider";
 const inter = IBM_Plex_Mono({ subsets: ["latin"], weight: "500" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://todo-app-talha.vercel.app/'),
+  metadataBase: new URL("https://todo-app-talha.vercel.app/"),
   title: {
     default: "Todo App",
     template: "%s | NextJs Todo App",

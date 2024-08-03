@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/../prisma/client";
 import bcryptjs from "bcryptjs";
-import { mailer} from "@/utils/mailer";
+import { mailer } from "@/utils/mailer";
 import { SignUpRequest, ApiResponse } from "@/types/types";
 
 export async function POST(request: NextRequest) {
@@ -12,8 +12,10 @@ export async function POST(request: NextRequest) {
     if (!email && !password) {
       throw new Error("email password required");
     }
-    const userEmail= email.toLowerCase()
-    const existingUser = await prisma.user.findUnique({ where: { email:userEmail } });
+    const userEmail = email.toLowerCase();
+    const existingUser = await prisma.user.findUnique({
+      where: { email: userEmail },
+    });
     if (existingUser) {
       return NextResponse.json<ApiResponse>(
         {
@@ -23,13 +25,13 @@ export async function POST(request: NextRequest) {
         { status: 200 }
       );
     }
-    //hash password
+
     const hashedPassword = await bcryptjs.hash(password, 12);
     const newUser = await prisma.user.create({
       data: {
         name,
-        email:userEmail,
-        hashedPassword, //update model
+        email: userEmail,
+        hashedPassword,
       },
     });
 

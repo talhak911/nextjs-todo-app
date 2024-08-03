@@ -9,7 +9,6 @@ export async function PUT(request: NextRequest) {
     if (!taskId) {
       throw new Error("task Id is required");
     }
-    //const newList =
     await prisma.task.update({
       where: {
         id: taskId,

@@ -9,7 +9,6 @@ export async function DELETE(request: NextRequest) {
     if (!taskId) {
       throw new Error("task id required");
     }
-    //const newTask =
     await prisma.task.delete({
       where: {
         id: taskId,

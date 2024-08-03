@@ -9,7 +9,6 @@ export async function POST(request: NextRequest) {
     if (!title || !email) {
       throw new Error("title and email required");
     }
-    //const newList =
     await prisma.list.create({
       data: {
         userEmail: email,

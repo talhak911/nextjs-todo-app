@@ -9,7 +9,6 @@ export async function PUT(request: NextRequest) {
     if (!name) {
       throw new Error("Name is required");
     }
-    //const newList =
     const user = await prisma.user.update({
       where: {
         email,

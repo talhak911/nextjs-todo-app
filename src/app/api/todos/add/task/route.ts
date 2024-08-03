@@ -9,7 +9,6 @@ export async function POST(request: NextRequest) {
     if (!listId && !title) {
       throw new Error("title and id required");
     }
-    //const newTask =
     await prisma.task.create({ data: { title, listId } });
 
     return NextResponse.json<ApiResponse>(

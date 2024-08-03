@@ -19,12 +19,12 @@ const SignIn = () => {
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="w-full space-y-3 p-5 md:mt-0 sm:max-w-[330px] ">
-      <div className="flex items-center justify-center gap-0 text-3xl md:text-4xl font-bold">
-      <h1 className="  text-vintageGardenPrimary   text-center font-stint inline-flex">
-        Sign In 
-      </h1>
-      <span className=" text-vintageGardenAccent -ml-1">.</span>
-       </div>
+        <div className="flex items-center justify-center gap-0 text-3xl md:text-4xl font-bold">
+          <h1 className="  text-vintageGardenPrimary   text-center font-stint inline-flex">
+            Sign In
+          </h1>
+          <span className=" text-vintageGardenAccent -ml-1">.</span>
+        </div>
         <CustomInput
           label={hidePassword ? "Email to send verification token" : "Email"}
           type="text"
@@ -79,20 +79,17 @@ const SignIn = () => {
           >
             {loading ? "Loading..." : hidePassword ? "Send Email" : "Sign In"}
           </button>
-
-       
         </div>
         <p className="text-sm font-light pt-4 text-center">
-            Do not have an account? &nbsp;
-            <Link
-              href="/sign-up"
-              className=" text-vintageGardenAccent font-semibold  hover:underline  "
-            >
-              Sign Up
-            </Link>
-          </p>
+          Do not have an account? &nbsp;
+          <Link
+            href="/sign-up"
+            className=" text-vintageGardenAccent font-semibold  hover:underline  "
+          >
+            Sign Up
+          </Link>
+        </p>
       </div>
-      
     </div>
   );
 };

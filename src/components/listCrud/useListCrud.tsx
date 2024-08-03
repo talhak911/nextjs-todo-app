@@ -28,11 +28,6 @@ export const useListCrud = ({update,listTitle}:{update?:boolean,listTitle?:strin
     setTitle(e.target.value);
   };
 
-  // const updateListTitle = (title: string) => {
-  //   useEffect(() => {
-  //     setTitle(title);
-  //   }, [title]);
-  // };
   const [visible, setVisible] = useState(false);
   const handleThemeSelect = (themeValue: string, themeName: string) => {
     setTheme(themeValue);
@@ -127,7 +122,6 @@ export const useListCrud = ({update,listTitle}:{update?:boolean,listTitle?:strin
   return {
     setVisible,
     handleChange,
-    // updateListTitle,
     handleAddList,
     handleUpdateList,
     handleDeleteList,
