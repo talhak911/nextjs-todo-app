@@ -21,14 +21,14 @@ export default function Home({
   const theme = searchParams?.theme as string;
   return (
     <div
-      className={`md:px-40 px-14 md:py-10 py-3 min-h-screen bg-${theme}Background bg-dotted-pattern  bg-dotted-size`}
+      className={`md:px-40 px-4 md:py-10 py-3 min-h-screen bg-${theme}Background bg-dotted-pattern  bg-dotted-size`}
     >
       <Navbar />
 
       <h1
         className={`w-full text-center  text-3xl md:text-4xl lg:text-6xl mb-10 text-${theme}Primary font-bold font-stint`}
       >
-        Todo Lists <span className={`text-${theme}Accent`}>.</span>
+        Todo Lists <span className={`text-${theme}Accent -ml-2`}>.</span>
       </h1>
       <div className={`max-w-3xl w-full mx-auto text-${theme}Primary `}>
         <ViewLists theme={theme} />

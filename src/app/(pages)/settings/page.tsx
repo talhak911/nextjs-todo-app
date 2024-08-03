@@ -23,13 +23,15 @@ export default async function Settings({
     <div
       className={`bg-${theme}Background bg-dotted-pattern bg-dotted-size min-h-screen pt-10 pb-10  h-fit w-full text-${theme}Primary`}
     >
-      <div className={`flex justify-end px-24 py-2 text-${theme}Primary`}>
-        <SignOut ><LogoutIcon /></SignOut>
+      <div className={`flex justify-end px-3 md:px-40 py-2 text-${theme}Primary`}>
+        <SignOut>
+          <LogoutIcon />
+        </SignOut>
       </div>
 
       <div className="flex flex-col items-center gap-5 ">
         <h1 className="font-bold text-4xl font-stint">
-          Settings <span>.</span>
+          Settings <span className={`-ml-1 text-${theme}Accent`}>.</span>
         </h1>
         <Profile theme={theme} />
       </div>
