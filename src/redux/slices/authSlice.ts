@@ -214,7 +214,7 @@ export const signInUser = createAsyncThunk(
         const session = await getSession();
 
         if (session?.user && session?.user?.email) {
-          const userData = await dispatch(
+            await dispatch(
             fetchUserData(session?.user?.email)
           ).unwrap();
         } else {
@@ -249,7 +249,7 @@ export const authSlice = createSlice({
         state.loading = "failed";
         state.signUpResponse = action.payload;
       })
-      .addCase(signInUser.rejected, (state, action) => {
+      .addCase(signInUser.rejected, (state) => {
         state.user = null;
         state.loading = "failed";
       })

@@ -84,3 +84,14 @@ export type AddTask = {
   email: string;
   title: string;
 };
+
+export type AddListType = {
+  email: string;
+  title: string;
+  theme: string;
+};
+export type UpdateListType = {
+  listId: string;
+  title: string;
+  theme: string;
+};

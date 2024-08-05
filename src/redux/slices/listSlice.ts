@@ -1,7 +1,11 @@
-import { ListType, ListSliceType } from "@/types/types";
+import {
+  ListType,
+  ListSliceType,
+  AddListType,
+  UpdateListType,
+} from "@/types/types";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
-
 
 const initialState: ListSliceType = {
   lists: [],
@@ -26,17 +30,6 @@ export const fetchLists = createAsyncThunk(
     }
   }
 );
-
-export type AddListType = {
-  email: string;
-  title: string;
-  theme: string;
-};
-export type UpdateListType = {
-  listId: string;
-  title: string;
-  theme: string;
-};
 
 export const addList = createAsyncThunk(
   "todoSlice/addList",

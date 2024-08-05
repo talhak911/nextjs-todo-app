@@ -2,8 +2,6 @@ import { AddTaskType, TaskSliceType, TaskType } from "@/types/types";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 
-
-
 const initialState: TaskSliceType = {
   tasks: [],
   loading: false,
