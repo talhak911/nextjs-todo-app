@@ -1,7 +1,6 @@
 "use client";
 
 import CustomInput from "@/components/customInput/CustomInput";
-
 import { useResetPassword } from "./useResetPassword";
 import { Suspense } from "react";
 const ResetPassword = () => {
@@ -48,9 +47,6 @@ const ResetPassword = () => {
     </div>
   );
 };
-
-
-
 
 export default function Page() {
   return (

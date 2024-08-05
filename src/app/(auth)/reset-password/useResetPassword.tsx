@@ -11,7 +11,6 @@ export const useResetPassword = () => {
   const router = useRouter();
   const token = useSearchParams().get("token");
   const dispatch: AppDispatch = useAppDispatch();
-
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [formValues, setFormValues] = useState({
