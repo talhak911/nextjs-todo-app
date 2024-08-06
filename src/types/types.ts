@@ -93,5 +93,5 @@ export type AddListType = {
 export type UpdateListType = {
   listId: string;
   title: string;
-  theme: string;
+  theme?: string;
 };
