@@ -2,13 +2,14 @@
 import Link from "next/link";
 import { useViewLists } from "./useViewLists";
 import ListCrud from "../listCrud/ListCrud";
+import { Loader } from "../../../public/assets/icons/loader";
 
 export default function ViewLists({ theme }: { theme?: string }) {
   const { lists, loading } = useViewLists();
   if (loading) {
     return (
       <div className="mt-3">
-        <h1>Loading</h1>
+        <Loader/>
       </div>
     );
   }
