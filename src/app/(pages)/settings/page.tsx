@@ -2,6 +2,7 @@ import { Profile } from "@/components/profile/Profile";
 import { Metadata } from "next";
 import { LogoutIcon } from "../../../../public/assets/icons/logout";
 import { SignOut } from "@/components/signOut/SignOut";
+import { BackButton } from "@/components/backButton/BackButton";
 
 export const metadata: Metadata = {
   title: "Settings page",
@@ -23,7 +24,10 @@ export default async function Settings({
     <div
       className={`bg-${theme}Background bg-dotted-pattern bg-dotted-size min-h-screen pt-10 pb-10  h-fit w-full text-${theme}Primary`}
     >
-      <div className={`flex justify-end px-3 md:px-40 py-2 text-${theme}Primary`}>
+      <div
+        className={`flex justify-between px-3 md:px-40 py-2 text-${theme}Primary`}
+      >
+        <BackButton />
         <SignOut>
           <LogoutIcon />
         </SignOut>
