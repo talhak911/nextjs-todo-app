@@ -22,7 +22,6 @@ export const authOptions: AuthOptions = {
       return token;
     },
   },
-  debug: true,
   pages: {
     signIn: "/sign-in",
   },
