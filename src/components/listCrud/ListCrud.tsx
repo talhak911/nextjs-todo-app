@@ -2,6 +2,7 @@
 import { THEMES } from "@/constants/themes";
 import CustomInput from "../customInput/CustomInput";
 import { useListCrud } from "./useListCrud";
+import { Loader } from "../../../public/assets/icons/loader";
 
 export default function ListCrud({
   update,
@@ -83,7 +84,11 @@ export default function ListCrud({
               })}
             </div>
 
-            <button
+          {loading?
+        <Loader/>:
+        <>
+          
+          <button
               disabled={loading}
               onClick={
                 update
@@ -96,20 +101,22 @@ export default function ListCrud({
               }
               className={`mt-8 px-4 py-3 bg-${theme}Accent  font-semibold rounded-full`}
             >
-              {loading ? "loading ..." : update ? "Update" : "Add List"}
+              {update ? "Update" : "Add List"}
             </button>
 
-            {update && (
-              <button
+       
+          {   update && <button
                 disabled={loading}
                 onClick={() => {
                   handleDeleteList(listIdToUpdate as string);
                 }}
                 className="mt-3 px-4 py-3 bg-rusticCharmPrimary text-white rounded-full"
               >
-                {loading ? "loading ..." : "Delete"}
-              </button>
-            )}
+              Delete
+              </button>}
+          </>  
+        }
+       
           </div>
         </div>
       )}

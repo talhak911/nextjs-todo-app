@@ -10,13 +10,20 @@ import { useSession } from "next-auth/react";
 import { ChangeEvent, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-export const useListCrud = ({update,listTitle}:{update?:boolean,listTitle?:string}) => {
+export const useListCrud = ({
+  update,
+  listTitle,
+}: {
+  update?: boolean;
+  listTitle?: string;
+}) => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState("");
   const [selectedTheme, setSelectedTheme] = useState<string>();
   const [theme, setTheme] = useState("");
   const email = useSession().data?.user?.email;
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     if (update && listTitle) {
@@ -28,7 +35,6 @@ export const useListCrud = ({update,listTitle}:{update?:boolean,listTitle?:strin
     setTitle(e.target.value);
   };
 
-  const [visible, setVisible] = useState(false);
   const handleThemeSelect = (themeValue: string, themeName: string) => {
     setTheme(themeValue);
     setSelectedTheme(themeName);
@@ -72,8 +78,6 @@ export const useListCrud = ({update,listTitle}:{update?:boolean,listTitle?:strin
       setLoading(true);
       if (title.length < 3) {
         toast.error("List name too short");
-      } else if (!theme) {
-        toast.error("please select theme");
       } else {
         const res = await dispatch(
           updateList({ listId: listIdToUpdate, theme: theme, title: title })

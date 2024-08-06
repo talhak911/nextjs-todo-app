@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useSignUp } from "./useSignUp";
 import googleIcon from "@/../public/assets/icons/google.png";
+import { INPUTS } from "@/constants/signUpInputs";
 
 export default function SignUp() {
   const {
@@ -26,42 +27,20 @@ export default function SignUp() {
             </h1>
             <span className=" text-vintageGardenAccent -ml-1">.</span>
           </div>
-          <CustomInput
-            label="Name"
-            name="name"
-            type="text"
-            theme="vintageGarden"
-            value={signUpform.name}
-            onChange={handleChange}
-          />
-          <CustomInput
-            label="Email"
-            name="email"
-            type="email"
-            theme="vintageGarden"
-            value={signUpform.email}
-            onChange={handleChange}
-          />
-          <CustomInput
-            label="Password"
-            name="password"
-            type="password"
-            theme="vintageGarden"
-            value={signUpform.password}
-            onChange={handleChange}
-          />
-          <CustomInput
-            label="Confirm Password"
-            name="confirmPassword"
-            type="password"
-            theme="vintageGarden"
-            value={signUpform.confirmPassword}
-            onChange={handleChange}
-          />
 
+          {INPUTS.map((field) => (
+            <CustomInput
+              key={field.name}
+              label={field.label}
+              name={field.name}
+              type={field.type}
+              theme="vintageGarden"
+              value={signUpform[field.name]}
+              onChange={handleChange}
+            />
+          ))}
           {response && (
             <p className="text-sm text-rusticCharmPrimary text-center">
-              {" "}
               {response}
             </p>
           )}
