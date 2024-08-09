@@ -21,10 +21,10 @@ export default async function Task({
   const theme = searchParams?.theme as string;
   return (
     <div
-      className={`md:py-20 py-10 px-10 min-h-screen bg-${theme}Background text-${theme}Primary bg-dotted-pattern bg-dotted-size`}
+      className={` px-[30px] pt-[24px] min-h-screen bg-${theme}Background text-${theme}Primary bg-dotted-pattern bg-dotted-size`}
     >
+      <BackButton />
       <div className="w-full max-w-sm mx-auto md:max-w-md lg:max-w-2xl">
-        <BackButton />
         <AddTask />
         <Tasks theme={theme} />
       </div>

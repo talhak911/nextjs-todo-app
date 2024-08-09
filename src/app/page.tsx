@@ -21,9 +21,12 @@ export default function Home({
   const theme = searchParams?.theme as string;
   return (
     <div
-      className={`md:px-40 px-4 md:py-10 py-3 min-h-screen bg-${theme}Background bg-dotted-pattern  bg-dotted-size`}
+      className={`md:px-40 px-4  min-h-screen bg-${theme}Background bg-dotted-pattern  bg-dotted-size`}
     >
-      <Navbar />
+
+      <div className=" md:-mx-40 -mx-4">
+        <Navbar />
+      </div>
 
       <h1
         className={`w-full text-center  text-3xl md:text-4xl lg:text-6xl mb-10 text-${theme}Primary font-bold font-stint`}

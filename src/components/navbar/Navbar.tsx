@@ -9,7 +9,7 @@ export const Navbar = () => {
   return (
     <div className={`bg-${theme}Background bg-dotted-pattern bg-dotted-size `}>
       <div
-        className={`flex justify-between items-center  backdrop-blur-[2px] px-6 py-4`}
+        className={`flex justify-between items-center  backdrop-blur-[3px] px-[30px] py-4`}
       >
         <Theme />
         <div className="w-fit">

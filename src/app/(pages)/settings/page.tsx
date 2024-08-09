@@ -22,10 +22,10 @@ export default async function Settings({
   const theme = searchParams?.theme as string;
   return (
     <div
-      className={`bg-${theme}Background bg-dotted-pattern bg-dotted-size min-h-screen pt-10 pb-10  h-fit w-full text-${theme}Primary`}
+      className={`bg-${theme}Background bg-dotted-pattern bg-dotted-size min-h-screen  pb-10  h-fit w-full text-${theme}Primary`}
     >
       <div
-        className={`flex justify-between px-3 md:px-40 py-2 text-${theme}Primary`}
+        className={`flex justify-between px-[24px] py-2 text-${theme}Primary`}
       >
         <BackButton />
         <SignOut>
