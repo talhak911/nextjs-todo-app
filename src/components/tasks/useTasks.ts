@@ -29,7 +29,7 @@ export const useTasks = () => {
         const res = await dispatch(updateTask({ taskId, status }));
 
         if (res?.meta.requestStatus == "rejected") {
-          toast.error(("rejected error " + res?.payload) as string);
+          toast.error((res?.payload) as string);
         } else if (res?.meta.requestStatus == "fulfilled") {
           toast.success("Status changed");
           dispatch(fetchTasks(listId));
@@ -46,7 +46,7 @@ export const useTasks = () => {
       } else if (window.confirm("Are you sure you want to delete")) {
         const res = await dispatch(deleteTask({ taskId }));
         if (res?.meta.requestStatus == "rejected") {
-          toast.error(("rejected error " + res?.payload) as string);
+          toast.error((res?.payload) as string);
         } else if (res?.meta.requestStatus == "fulfilled") {
           toast.success("Status changed");
           dispatch(fetchTasks(listId));

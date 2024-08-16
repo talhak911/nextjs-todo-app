@@ -28,7 +28,7 @@ export const useAddTask = () => {
         const res = await dispatch(addTask({ listId, title }));
 
         if (res?.meta.requestStatus == "rejected") {
-          toast.error(("rejected error " + res?.payload) as string);
+          toast.error((res?.payload) as string);
         } else if (res?.meta.requestStatus == "fulfilled") {
           setTitle("");
           toast.success("List add");

@@ -68,7 +68,7 @@ export const useSignIn = () => {
           })
         );
         if (res?.meta.requestStatus == "rejected") {
-          toast.error(("rejected error " + res.payload) as string);
+          toast.error((res.payload) as string);
         } else if (res?.meta.requestStatus == "fulfilled") {
           toast.success("Correct login");
           router.push("/");

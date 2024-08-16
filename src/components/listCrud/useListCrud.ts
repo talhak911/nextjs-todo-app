@@ -54,7 +54,7 @@ export const useListCrud = ({
           );
 
           if (res?.meta.requestStatus == "rejected") {
-            toast.error(("rejected error " + res?.payload) as string);
+            toast.error(( res?.payload) as string);
           } else if (res?.meta.requestStatus == "fulfilled") {
             setSelectedTheme("");
             setTitle("");
@@ -84,7 +84,7 @@ export const useListCrud = ({
         );
 
         if (res?.meta.requestStatus == "rejected") {
-          toast.error(("rejected error " + res?.payload) as string);
+          toast.error((res?.payload) as string);
         } else if (res?.meta.requestStatus == "fulfilled") {
           setSelectedTheme("");
           setTitle("");
@@ -109,7 +109,7 @@ export const useListCrud = ({
       const res = await dispatch(deleteList({ listId: listIdToDelete }));
 
       if (res?.meta.requestStatus == "rejected") {
-        toast.error(("rejected error " + res?.payload) as string);
+        toast.error((res?.payload) as string);
       } else if (res?.meta.requestStatus == "fulfilled") {
         toast.success("List Deleted");
         if (typeof email === "string") {
