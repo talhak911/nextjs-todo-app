@@ -8,8 +8,8 @@ export default function AddTask() {
 
   return (
     <div>
-      <h1 className=" text-3xl md:text-4xl font-bold text-center font-stint ">
-        {listName}
+      <h1 className="justify-center flex text-3xl md:text-5xl font-bold text-center font-stint ">
+        {listName}<span className={`text-${theme}Accent`}>.</span>
       </h1>
       <div className={`flex gap-3 items-center justify-center pt-8`}>
         <div className=" w-full">

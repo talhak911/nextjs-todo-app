@@ -29,9 +29,9 @@ export default function Home({
       </div>
 
       <h1
-        className={`w-full text-center  text-3xl md:text-4xl lg:text-6xl mb-10 text-${theme}Primary font-bold font-stint`}
+        className={`flex justify-center w-full text-center  text-3xl md:text-4xl lg:text-6xl mb-10 text-${theme}Primary font-bold font-stint`}
       >
-        Todo Lists <span className={`text-${theme}Accent -ml-2`}>.</span>
+        Todo Lists <span className={`text-${theme}Accent`}>.</span>
       </h1>
       <div className={`max-w-3xl w-full mx-auto text-${theme}Primary `}>
         <ViewLists theme={theme} />
