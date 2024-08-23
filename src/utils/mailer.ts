@@ -42,15 +42,15 @@ export const mailer = async ({ email, emailType, userId }: any) => {
 
     const getMailHtml = () => {
       if (emailType === "VERIFY")
-        return `<p>Click <a href="${process.env.DOMAIN}/verify-email?token=${token}">here</a> to verify your email
+        return `<p>Click <a href="https://${process.env.DOMAIN}/verify-email?token=${token}">here</a> to verify your email
                 or copy and paste the link below in your browser. <br> ${process.env.DOMAIN}/verify-email?token=${token}
                 </p>`;
       else if (emailType === "RESET") {
-        return `<p>Click <a href="${process.env.DOMAIN}/reset-password?token=${token}">here</a> to reset your password
+        return `<p>Click <a href="https://${process.env.DOMAIN}/reset-password?token=${token}">here</a> to reset your password
                     or copy and paste the link below in your browser. <br> ${process.env.DOMAIN}/reset-password?token=${token}
                     </p>`;
       } else if (emailType === "CHANGE") {
-        return `<p>Click <a href="${process.env.DOMAIN}/change-email?token=${token}&email=${email}">here</a> to change your email address
+        return `<p>Click <a href="https://${process.env.DOMAIN}/change-email?token=${token}&email=${email}">here</a> to change your email address
                     or copy and paste the link below in your browser. <br> ${process.env.DOMAIN}/change-email?token=${token}&email=${email}
                     </p>`;
       }
