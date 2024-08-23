@@ -5,6 +5,7 @@ import { fetchUserData, registerUser } from "@/redux/slices/authSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks/useStore";
 import toast from "react-hot-toast";
 import { getSession, signIn } from "next-auth/react";
+import { testEmail } from "@/utils/testEmail";
 
 export const useSignUp = () => {
   const dispatch: AppDispatch = useAppDispatch();
@@ -23,10 +24,11 @@ export const useSignUp = () => {
     setSignupForm({ ...signUpform, [e.target.name]: e.target.value });
   };
 
+
   const handleSignUp = async () => {
     if (signUpform.name.length < 2) {
       toast.error("Name should be minimum 2 characters long");
-    } else if (!signUpform.email.endsWith(".com")) {
+    } else if (!testEmail(signUpform.email)) {
       toast.error("Email should be valid");
     } else if (signUpform.password !== signUpform.confirmPassword) {
       toast.error("Password do no match");

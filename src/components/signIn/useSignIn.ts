@@ -5,6 +5,7 @@ import {
   forgetPassword,
   signInUser,
 } from "@/redux/slices/authSlice";
+import { testEmail } from "@/utils/testEmail";
 import { getSession, signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ChangeEvent, useState } from "react";
@@ -35,7 +36,7 @@ export const useSignIn = () => {
   const handleForgetPassword = async () => {
     try {
       setLoading(true);
-      if (!formValues.email.endsWith(".com")) {
+      if (!testEmail(formValues.email)) {
         toast.error("Email should be valid");
       } else {
         const res = await dispatch(forgetPassword(formValues.email));
@@ -55,7 +56,7 @@ export const useSignIn = () => {
   const handleSignIn = async () => {
     try {
       setLoading(true);
-      if (!formValues.email.endsWith(".com")) {
+      if (!testEmail(formValues.email)) {
         toast.error("Email should be valid");
       } else if (formValues.password.length < 3) {
         toast.error("Password too short");
