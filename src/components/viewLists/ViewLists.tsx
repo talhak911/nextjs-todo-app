@@ -14,7 +14,7 @@ export default function ViewLists({ theme }: { theme?: string }) {
     );
   }
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-1 xl:gap-[18px] xl:mb-[18px]">
       {lists?.map((list, index) => {
         return (
           <div key={index} className=" flex justify-between items-center px-5">
