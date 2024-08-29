@@ -6,6 +6,7 @@ const safelist = Object.keys(COLORS).flatMap((color) => [
   `text-${color}`,
   `border-${color}`,
   `placeholder-${color}`,
+  `decoration-${color}`
 ]);
 
 const config: Config = {
@@ -58,6 +59,7 @@ const config: Config = {
         stint: ["Stint_Ultra_Condensed"],
       },
     },
+
   },
   plugins: [],
 };

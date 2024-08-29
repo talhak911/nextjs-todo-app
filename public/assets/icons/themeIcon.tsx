@@ -1,12 +1,12 @@
 export const ThemeIcon = () => (
   <svg
-    width="40"
-    height="40"
+    width="48"
+    height="48"
     viewBox="0 0 48 48"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <rect width="40" height="40" fill="url(#pattern0_68_19)" />
+    <rect width="48" height="48" fill="url(#pattern0_68_19)" />
     <defs>
       <pattern
         id="pattern0_68_19"

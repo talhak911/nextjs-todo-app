@@ -9,11 +9,11 @@ const CustomInput: React.FC<CustomInputProps> = ({
   onChange,
   theme,
 }) => (
-  <div className="w-full">
+  <div className="w-full ">
     {label && (
       <label
         htmlFor={name}
-        className={`block mb-1  font-medium ml-2 text-${theme}Primary`}
+        className={`block mb-1  xl:mb-[16px] xl:text-[30px] ml-2 text-${theme}Primary`}
       >
         {label}
       </label>
@@ -22,8 +22,8 @@ const CustomInput: React.FC<CustomInputProps> = ({
       type={type}
       name={name}
       id={name}
-      className={` border-${theme}Accent font-medium placeholder:opacity-100 bg-transparent border-4 text-${theme}Primary placeholder-${theme}Primary rounded-full  w-full px-2 py-1.5`}
-      placeholder={`Enter your ${label?.toLowerCase() || name}`}
+      className={`xl:h-[58px] xl:text-[30px] xl:border-[5px] border-${theme}Accent font-medium placeholder:opacity-100 bg-transparent border-4 text-${theme}Primary placeholder-${theme}Primary rounded-full  w-full xl:pl-[32px] px-2 py-1.5 xl:pt-[8px] xl:pb-[11px] xl:pr-[39px]`}
+      placeholder={`${label || name}`}
       value={value}
       onChange={onChange}
       required

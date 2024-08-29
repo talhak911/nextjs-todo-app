@@ -17,14 +17,14 @@ export default function ViewLists({ theme }: { theme?: string }) {
     <div className="flex flex-col gap-1">
       {lists?.map((list, index) => {
         return (
-          <div key={index} className=" flex justify-between items-center">
+          <div key={index} className=" flex justify-between items-center px-5">
             <Link
               href={`/tasks?listId=${list?.id}&listName=${list?.title}&theme=${list?.theme}`}
-              className="relative text-xl md:text-3xl w-fit h-fit"
+              className="relative text-xl md:text-3xl xl:text-[64px] xl:leading-[83.2px] w-fit h-fit"
             >
               <span className="relative z-10">{list?.title}</span>
               <span
-                className={`absolute left-0 right-0 bottom-1 h-[4px] bg-${theme}Accent z-0`}
+                className={`absolute left-0 right-0 bottom-2 xl:bottom-3 h-[3px] xl:h-[20px] bg-${list.theme}Accent z-0`}
               ></span>
             </Link>
             <ListCrud

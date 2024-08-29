@@ -7,19 +7,19 @@ import { useNavbar } from "./useNavbar";
 export const Navbar = () => {
   const { theme } = useNavbar();
   return (
-    <div className={`bg-${theme}Background bg-dotted-pattern bg-dotted-size `}>
+    <div className={` bg-${theme}Background bg-dotted-pattern bg-dotted-size `}>
       <div
-        className={`flex justify-between items-center  backdrop-blur-[3px] px-[30px] py-4`}
+        className={`flex h-fit justify-between items-center  backdrop-blur-[3px] `}
       >
         <Theme />
-        <div className="w-fit">
-          <Link
-            className={`text-${theme}Primary `}
-            href={`/settings?theme=${theme}`}
-          >
+        <Link
+          className={`text-${theme}Primary`}
+          href={`/settings?theme=${theme}`}
+        >
+          <div className="p-[24px]">
             <SettingsIcon />
-          </Link>
-        </div>
+          </div>
+        </Link>
       </div>
     </div>
   );
