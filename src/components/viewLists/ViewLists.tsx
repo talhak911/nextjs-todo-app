@@ -24,7 +24,7 @@ export default function ViewLists({ theme }: { theme?: string }) {
             >
               <span className="relative z-10">{list?.title}</span>
               <span
-                className={`absolute left-0 right-0 bottom-2 xl:bottom-3 h-[3px] xl:h-[20px] bg-${list.theme}Accent z-0`}
+                className={`xl:ml-2 absolute left-0 right-0 bottom-2 xl:bottom-3 h-[3px] xl:h-[20px] bg-${list.theme}Accent z-0`}
               ></span>
             </Link>
             <ListCrud

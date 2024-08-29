@@ -6,7 +6,7 @@ const safelist = Object.keys(COLORS).flatMap((color) => [
   `text-${color}`,
   `border-${color}`,
   `placeholder-${color}`,
-  `decoration-${color}`
+  `accent-${color}`,
 ]);
 
 const config: Config = {
@@ -56,10 +56,9 @@ const config: Config = {
         "dotted-size": "20px 20px",
       },
       fontFamily: {
-        stint: ["Stint_Ultra_Condensed"],
+        stint: ["Stint Ultra Condensed", "sans-serif"],
       },
     },
-
   },
   plugins: [],
 };

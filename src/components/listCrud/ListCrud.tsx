@@ -33,19 +33,41 @@ export default function ListCrud({
     <div>
       {update ? (
         <button
-          className={`mt-3 text-sm md:text-xl] xl:text-[30px] bg-${theme}Accent md:px-3 md:py-2 p-2 border-4 rounded-full border-${theme}Accent `}
+          className={`mt-3 text-sm  xl:text-[30px] bg-${theme}Accent md:px-3 md:py-2 p-2 border-4 rounded-full border-${theme}Accent `}
           onClick={() => setVisible(true)}
         >
           Edit
         </button>
       ) : (
-        <button
-          className={`ml-5 xl:ml-0 mt-3 text-sm md:text-xl xl:leading-[65px] xl:text-[64px] md:px-3 md:py-2 p-2 border-4 rounded-full border-${theme}Accent `}
+        // <div>
+
+        // <button
+        //   className={`relative ml-5 xl:ml-0 mt-3 text-sm md:text-xl xl:leading-[65px] xl:text-[64px] md:px-3 md:py-2 p-2 rounded-full `}
+        //   onClick={() => setVisible(true)}
+        //   >
+        //     <p className="z-10">+ Add List.</p>
+        //   <span
+        //         className={`xl:ml-2 absolute left-0 right-0 bottom-2 xl:bottom-3 h-[3px] xl:h-[20px] bg-${theme}Accent z-0 `}
+        //       ></span>
+        // </button>
+
+          // </div>
+          <div className="flex  text-xl md:text-3xl xl:text-[64px] xl:leading-[83.2px]">
+
+          <button
           onClick={() => setVisible(true)}
-        >
-          + Add List
+          className="flex relative text-xl md:text-3xl xl:text-[64px] xl:leading-[83.2px] w-fit h-fit"
+          >
+          <span className="relative z-10">+ Add List</span>
+          <span
+            className={`xl:ml-2 absolute left-0 right-0 bottom-2 xl:bottom-3 h-[3px] xl:h-[20px] bg-${theme}Accent z-0`}
+         ></span>
+
         </button>
-      )}
+<span >.</span>
+            </div>
+
+)}
 
       {visible && (
         <div

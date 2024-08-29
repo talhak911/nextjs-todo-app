@@ -25,7 +25,7 @@ export default async function Settings({
       className={`bg-${theme}Background bg-dotted-pattern bg-dotted-size min-h-screen  pb-10  h-fit w-full text-${theme}Primary`}
     >
       <div
-        className={`flex justify-between px-[24px] py-2 backdrop-blur-[3px] text-${theme}Primary`}
+        className={`absolute w-full *:flex justify-between px-[24px] py-2 xl:p-[24px] backdrop-blur-[3px] text-${theme}Primary`}
       >
         <BackButton />
         <SignOut>
@@ -33,8 +33,8 @@ export default async function Settings({
         </SignOut>
       </div>
 
-      <div className="flex flex-col items-center gap-5 ">
-        <h1 className="flex font-bold text-4xl font-stint">
+      <div className="flex flex-col items-center justify-center min-h-screen gap-5 xl:gap-[48px] ">
+        <h1 className="flex font-bold text-4xl md:text-5xl font-stint xl:text-[124px] xl:leading-[139.98px] xl:mt-[61px]">
           Settings <span className={` text-${theme}Accent`}>.</span>
         </h1>
         <Profile theme={theme} />

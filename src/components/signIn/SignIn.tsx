@@ -19,36 +19,39 @@ const SignIn = () => {
   return (
     <div className="flex items-center justify-center min-h-screen   md">
       <div className="w-full p-5 xl:p-0 md:mt-0 sm:max-w-[330px] xl:max-w-[447px] ">
-        <div className="flex items-center justify-center gap-0   font-bold  text-3xl md:text-4xl xl:text-[90px]  xl:mb-[90px]">
+        <div className="flex items-center justify-center gap-0   font-bold  text-4xl md:text-5xl xl:text-[90px]  xl:mb-[90px]">
           <h1 className=" text-vintageGardenPrimary text-center font-stint ">
             Sign In
           </h1>
           <span className=" text-vintageGardenAccent xl:-ml-3 ">.</span>
         </div>
-       <div className="space-y-3 xl:space-y-[32px]">
-       <CustomInput
-          label={hidePassword ? "Email to send verification token" : "Email"}
-          type="text"
-          theme="vintageGarden"
-          value={formValues.email}
-          onChange={handleChange}
-          name="email"
-        />
-
-        {!hidePassword && (
+        <div className="space-y-3 xl:space-y-[32px]">
           <CustomInput
-            label="Password"
-            type="password"
+            label={hidePassword ? "Email to send verification token" : "Email"}
+            type="text"
             theme="vintageGarden"
-            value={formValues.password}
+            value={formValues.email}
             onChange={handleChange}
-            name="password"
+            name="email"
           />
-        )}
-       </div>
+
+          {!hidePassword && (
+            <CustomInput
+              label="Password"
+              type="password"
+              theme="vintageGarden"
+              value={formValues.password}
+              onChange={handleChange}
+              name="password"
+            />
+          )}
+        </div>
 
         <div className="flex justify-end">
-          <button onClick={onClickForget} className="text-sm xl:text-[20px] xl:mt-[16px]">
+          <button
+            onClick={onClickForget}
+            className="text-sm xl:text-[20px] xl:mt-[16px]"
+          >
             Forget Password{" "}
           </button>
         </div>
