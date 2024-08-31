@@ -25,7 +25,7 @@ export default async function Settings({
       className={`bg-${theme}Background bg-dotted-pattern bg-dotted-size min-h-screen  pb-10  h-fit w-full text-${theme}Primary`}
     >
       <div
-        className={`absolute w-full *:flex justify-between px-[24px] py-2 xl:p-[24px] backdrop-blur-[3px] text-${theme}Primary`}
+        className={`absolute w-full flex justify-between px-[24px] py-2 xl:p-[24px] backdrop-blur-[3px] text-${theme}Primary`}
       >
         <BackButton />
         <SignOut>
