@@ -65,7 +65,7 @@ export const updateTask = createAsyncThunk(
   }
 );
 export const deleteTask = createAsyncThunk(
-  "taskSlice/updateTask",
+  "taskSlice/deleteTask",
   async ({ taskId }: { taskId: string }, { rejectWithValue }) => {
     try {
       const response = await axios.delete("api/todos/delete/task", {
@@ -96,10 +96,12 @@ const taskSlice = createSlice({
         fetchTasks.fulfilled,
         (state, action: PayloadAction<TaskType[]>) => {
           state.tasks = action.payload;
+          state.loading = false;
         }
       )
       .addCase(fetchTasks.rejected, (state, action) => {
         state.error = action.payload as string;
+        state.loading = false;
       });
   },
 });
