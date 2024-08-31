@@ -18,7 +18,7 @@ export default function SignUp() {
   } = useSignUp();
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-vintage-garden-background">
+    <div className="flex items-center justify-center py-4 min-h-screen bg-vintage-garden-background">
       <div className="w-full p-5 xl:p-0  md:mt-0 sm:max-w-[330px] xl:max-w-[447px]">
         <div className="space-y-4 md:space-y-4 xl:space-y-[32px]">
           <div className="flex items-center justify-center gap-0 text-4xl md:text-5xl font-bold xl:text-[90px]  xl:mb-[90px]">
@@ -64,7 +64,7 @@ export default function SignUp() {
             <button
               onClick={handleSignUp}
               disabled={loading == "pending"}
-              className="w-full bg-vintageGardenAccent rounded-full focus:ring-4  xl:h-[72px] focus:outline-none focus:ring-primary-300 font-medium text-sm xl:text-[30px] text-center "
+              className="w-full bg-vintageGardenAccent rounded-full focus:ring-4 h-10 xl:h-[72px] focus:outline-none focus:ring-primary-300 font-medium text-sm xl:text-[30px] text-center "
             >
               {loading === "pending"
                 ? "Creating account..."
