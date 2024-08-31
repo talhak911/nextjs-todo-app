@@ -32,13 +32,9 @@ export default async function Task({
           <SettingsIcon />
         </Link>
       </div>
-      <div className={` px-[30px] pt-[24px]`}>
-        <div className={` px-[30px] pt-[24px]`}>
-          <div className="w-full max-w-sm mx-auto md:max-w-md lg:max-w-2xl">
-            <AddTask />
-            <Tasks theme={theme} />
-          </div>
-        </div>
+      <div className="w-full max-w-sm mx-auto md:max-w-md lg:max-w-2xl">
+        <AddTask />
+        <Tasks theme={theme} />
       </div>
     </div>
   );

@@ -17,7 +17,7 @@ export default function ViewLists({ theme }: { theme?: string }) {
     <div className="flex flex-col gap-1 xl:gap-[18px] xl:mb-[18px]">
       {lists?.map((list, index) => {
         return (
-          <div key={index} className=" flex justify-between items-center px-5">
+          <div key={index} className=" flex flex-wrap justify-between items-center px-5">
             <Link
               href={`/tasks?listId=${list?.id}&listName=${list?.title}&theme=${list?.theme}`}
               className="relative text-xl md:text-3xl xl:text-[64px] xl:leading-[83.2px] w-fit h-fit"

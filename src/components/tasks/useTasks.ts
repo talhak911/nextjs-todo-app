@@ -66,7 +66,6 @@ export const useTasks = () => {
 
   return {
     tasks,
-
     handleDeleteTask,
     handleUpdateTask,
   };

@@ -15,7 +15,7 @@ export default function Tasks({ theme }: { theme?: string }) {
     <div className="flex flex-col  gap-[14px] mt-4 xl:mt-[49px] ">
       {tasks?.map((task) => {
         return (
-          <div className="flex justify-between items-center" key={task?.id}>
+          <div className="flex flex-wrap gap-3 justify-between items-center" key={task?.id}>
             <div className={`flex accent-${theme}Accent items-end gap-[24px]`}>
               <input
                 className={`xl:mb-2  w-6 h-6 lg:w-[48px] lg:h-[48px] appearance-none border-2 xl:border-[5px] border-${theme}Accent rounded-md  relative
