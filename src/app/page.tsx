@@ -21,7 +21,7 @@ export default function Home({
   const theme = searchParams?.theme as string;
   return (
     <div
-      className={` min-h-screen bg-${theme}Background bg-dotted-pattern  bg-dotted-size`}
+      className={` min-h-screen bg-${theme}Background bg-dotted-pattern  bg-dotted-size pb-4`}
     >
       <Navbar />
 
