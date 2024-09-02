@@ -23,7 +23,7 @@ const SignIn = () => {
           <h1 className=" text-vintageGardenPrimary text-center font-stint ">
             Sign In
           </h1>
-          <span className=" text-vintageGardenAccent xl:-ml-3 ">.</span>
+          <span className=" text-vintageGardenAccent -ml-1 xl:-ml-3 ">.</span>
         </div>
         <div className="space-y-3 xl:space-y-[32px]">
           <CustomInput
@@ -50,12 +50,12 @@ const SignIn = () => {
         <div className="flex justify-end">
           <button
             onClick={onClickForget}
-            className="text-sm xl:text-[20px] xl:mt-[16px]"
+            className="text-sm xl:text-[20px] mt-[16px]"
           >
-            Forget Password{" "}
+            Forget Password
           </button>
         </div>
-        <div className="xl:space-y-[19px] space-y-3 xl:mt-[64px]">
+        <div className="xl:space-y-[19px] space-y-3 mt-[16px] xl:mt-[64px]">
           <button
             className=" flex items-center justify-center h-10 xl:h-[72px] gap-3 w-full  border-4 xl:border-[5px] border-vintageGardenAccent rounded-full text-sm xl:text-[30px] "
             onClick={handleGoogleSignIn}
