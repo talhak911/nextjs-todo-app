@@ -50,7 +50,7 @@ const config: Config = {
 
       backgroundImage: {
         "dotted-pattern":
-          "radial-gradient(circle, rgba(0, 0, 0, 0.1) 1px, transparent 5px)",
+          "radial-gradient(circle, rgba(0, 0, 0, 0.2) 1px, transparent 3px)",
       },
       backgroundSize: {
         "dotted-size": "20px 20px",
