@@ -1,7 +1,6 @@
 import AddTask from "@/components/addTask/AddTask";
 import { BackButton } from "@/components/backButton/BackButton";
 import Tasks from "@/components/tasks/Tasks";
-import { Theme } from "@/components/theme/Theme";
 import { Metadata } from "next";
 import { SettingsIcon } from "../../../../public/assets/icons/settingsIcon";
 import Link from "next/link";
