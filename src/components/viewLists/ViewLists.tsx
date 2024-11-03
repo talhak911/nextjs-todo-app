@@ -8,19 +8,22 @@ export default function ViewLists({ theme }: { theme?: string }) {
   const { lists, loading } = useViewLists();
   if (loading) {
     return (
-      <div className="mt-3">
-        <Loader/>
+      <div className="mt-3 flex justify-center">
+        <Loader />
       </div>
     );
   }
   return (
-    <div className="flex flex-col gap-1 xl:gap-[18px] xl:mb-[18px]">
+    <div className="flex flex-col gap-1 xl:gap-5 xl:mb-[18px]  px-5">
       {lists?.map((list, index) => {
         return (
-          <div key={index} className=" flex flex-wrap justify-between items-center px-5">
+          <div
+            key={index}
+            className=" flex flex-wrap justify-between items-center"
+          >
             <Link
               href={`/tasks?listId=${list?.id}&listName=${list?.title}&theme=${list?.theme}`}
-              className="relative text-xl md:text-3xl xl:text-[64px] xl:leading-[83.2px] w-fit h-fit"
+              className="relative text-xl md:text-3xl xl:text-5xl w-fit h-fit"
             >
               <span className="relative z-10">{list?.title}</span>
               <span

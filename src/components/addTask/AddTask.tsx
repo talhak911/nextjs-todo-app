@@ -9,7 +9,7 @@ export default function AddTask() {
   return (
     <div>
       <h1
-        className={`flex justify-center w-full text-center  text-4xl md:text-5xl  xl:text-[124px] xl:leading-[139.98px] xl:mt-[16px] mb-[24px] text-${theme}Primary font-bold font-stint`}
+        className={`flex justify-center w-full text-center  text-4xl md:text-5xl  xl:text-7xl xl:mt-[16px] mb-[24px] text-${theme}Primary font-bold font-stint`}
       >
         {listName} <span className={`text-${theme}Accent`}>.</span>
       </h1>

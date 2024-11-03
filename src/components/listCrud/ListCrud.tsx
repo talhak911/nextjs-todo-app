@@ -4,18 +4,14 @@ import CustomInput from "../customInput/CustomInput";
 import { useListCrud } from "./useListCrud";
 import { Loader } from "../../../public/assets/icons/loader";
 import { Navbar } from "../navbar/Navbar";
+import { ListCrudProps } from "@/types/types";
 
 export default function ListCrud({
   update,
   listIdToUpdate,
   listTitle,
   theme,
-}: {
-  listTitle?: string;
-  listIdToUpdate?: string;
-  update?: boolean;
-  theme?: string;
-}) {
+}:ListCrudProps ) {
   const {
     setVisible,
     handleChange,
@@ -31,12 +27,12 @@ export default function ListCrud({
 
   return (
     <div>
-      {update ? (
+      {/* {update ? (
         <button
           className={`mt-3 text-sm  xl:text-[30px] bg-${theme}Accent md:px-3 md:py-2 p-2 border-4 rounded-full border-${theme}Accent `}
           onClick={() => setVisible(true)}
         >
-          Edit
+          Editt
         </button>
       ) : (
         <div className="flex  text-xl md:text-3xl xl:text-[64px] xl:leading-[83.2px]">
@@ -51,7 +47,13 @@ export default function ListCrud({
           </button>
           <span>.</span>
         </div>
-      )}
+      )} */}
+      <button
+        className={` ml-3 mt-3 text-sm md:text-xl md:px-3 md:py-2 py-2 px-3 border-4 rounded-full border-${theme}Accent  md:text-3xl xl:text-3xl `}
+        onClick={() => setVisible(true)}
+      >
+        {update ? "Edit" : "Add List"}
+      </button>
 
       {visible && (
         <div

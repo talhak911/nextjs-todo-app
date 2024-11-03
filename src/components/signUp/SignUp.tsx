@@ -19,15 +19,13 @@ export default function SignUp() {
 
   return (
     <div className="flex items-center justify-center py-4 min-h-screen bg-vintage-garden-background">
-      <div className="w-full p-5 xl:p-0  md:mt-0 sm:max-w-[330px] xl:max-w-[447px]">
+      <div className="w-full p-5 xl:p-0  md:mt-0 max-w-80 md:max-w-96 xl:max-w-[447px]">
         <div className="space-y-4 md:space-y-4 xl:space-y-[32px]">
           <div className="flex items-center justify-center gap-0 text-4xl md:text-5xl font-bold xl:text-[90px]  xl:mb-[90px]">
             <h1 className="  text-vintageGardenPrimary   text-center font-stint inline-flex">
               Sign Up
             </h1>
-            <span className=" text-vintageGardenAccent -ml-1  xl:-ml-3">
-              .
-            </span>
+            <span className=" text-vintageGardenAccent -ml-1  xl:-ml-3">.</span>
           </div>
 
           {INPUTS.map((field) => (
@@ -71,17 +69,16 @@ export default function SignUp() {
                 : "Create an account"}
             </button>
           </div>
-
         </div>
         <p className="text-sm font-light xl:text-[20px] mt-[16px]">
-            Already have an account?&nbsp;
-            <Link
-              href="/sign-in"
-              className=" text-vintageGardenAccent font-semibold  underline"
-            >
-              Log in
-            </Link>
-          </p>
+          Already have an account?&nbsp;
+          <Link
+            href="/sign-in"
+            className=" text-vintageGardenAccent font-semibold  underline"
+          >
+            Log in
+          </Link>
+        </p>
       </div>
     </div>
   );

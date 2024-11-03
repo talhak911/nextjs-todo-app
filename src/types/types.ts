@@ -95,3 +95,10 @@ export type UpdateListType = {
   title: string;
   theme?: string;
 };
+
+export type ListCrudProps = {
+  listTitle?: string;
+  listIdToUpdate?: string;
+  update?: boolean;
+  theme?: string;
+};

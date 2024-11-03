@@ -26,7 +26,7 @@ export default function Home({
       <Navbar />
 
       <h1
-        className={`flex justify-center w-full text-center  text-4xl md:text-5xl  xl:text-[124px] xl:leading-[139.98px] xl:mt-[16px] mb-10 text-${theme}Primary font-bold font-stint`}
+        className={`flex justify-center w-full text-center  text-4xl md:text-6xl  xl:text-8xl xl:mt-[16px] mb-10 text-${theme}Primary font-bold font-stint`}
       >
         Todo Lists <span className={`text-${theme}Accent`}>.</span>
       </h1>
